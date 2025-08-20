@@ -35,10 +35,11 @@
             etapasToolStripMenuItem = new ToolStripMenuItem();
             statusAtendimentoToolStripMenuItem = new ToolStripMenuItem();
             atendimentosToolStripMenuItem = new ToolStripMenuItem();
-            sistemaToolStripMenuItem = new ToolStripMenuItem();
             novoAtendimentoToolStripMenuItem = new ToolStripMenuItem();
             consultasToolStripMenuItem = new ToolStripMenuItem();
+            sistemaToolStripMenuItem = new ToolStripMenuItem();
             sairToolStripMenuItem = new ToolStripMenuItem();
+            btnConexao = new Button();
             mnuTelaPrincipal.SuspendLayout();
             SuspendLayout();
             // 
@@ -89,6 +90,18 @@
             atendimentosToolStripMenuItem.Size = new Size(97, 20);
             atendimentosToolStripMenuItem.Text = "Atendimentos ";
             // 
+            // novoAtendimentoToolStripMenuItem
+            // 
+            novoAtendimentoToolStripMenuItem.Name = "novoAtendimentoToolStripMenuItem";
+            novoAtendimentoToolStripMenuItem.Size = new Size(176, 22);
+            novoAtendimentoToolStripMenuItem.Text = "Novo Atendimento";
+            // 
+            // consultasToolStripMenuItem
+            // 
+            consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
+            consultasToolStripMenuItem.Size = new Size(176, 22);
+            consultasToolStripMenuItem.Text = "Consultas";
+            // 
             // sistemaToolStripMenuItem
             // 
             sistemaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sairToolStripMenuItem });
@@ -96,23 +109,21 @@
             sistemaToolStripMenuItem.Size = new Size(60, 20);
             sistemaToolStripMenuItem.Text = "Sistema";
             // 
-            // novoAtendimentoToolStripMenuItem
-            // 
-            novoAtendimentoToolStripMenuItem.Name = "novoAtendimentoToolStripMenuItem";
-            novoAtendimentoToolStripMenuItem.Size = new Size(180, 22);
-            novoAtendimentoToolStripMenuItem.Text = "Novo Atendimento";
-            // 
-            // consultasToolStripMenuItem
-            // 
-            consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
-            consultasToolStripMenuItem.Size = new Size(180, 22);
-            consultasToolStripMenuItem.Text = "Consultas";
-            // 
             // sairToolStripMenuItem
             // 
             sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            sairToolStripMenuItem.Size = new Size(180, 22);
+            sairToolStripMenuItem.Size = new Size(93, 22);
             sairToolStripMenuItem.Text = "Sair";
+            // 
+            // btnConexao
+            // 
+            btnConexao.Location = new Point(680, 416);
+            btnConexao.Name = "btnConexao";
+            btnConexao.Size = new Size(107, 23);
+            btnConexao.TabIndex = 1;
+            btnConexao.Text = "Teste Conexão";
+            btnConexao.UseVisualStyleBackColor = true;
+            btnConexao.Click += btnConexao_Click;
             // 
             // FrmTelaPrincipal
             // 
@@ -120,6 +131,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnConexao);
             Controls.Add(mnuTelaPrincipal);
             MainMenuStrip = mnuTelaPrincipal;
             Name = "FrmTelaPrincipal";
@@ -143,5 +155,6 @@
         private ToolStripMenuItem consultasToolStripMenuItem;
         private ToolStripMenuItem sistemaToolStripMenuItem;
         private ToolStripMenuItem sairToolStripMenuItem;
+        private Button btnConexao;
     }
 }
