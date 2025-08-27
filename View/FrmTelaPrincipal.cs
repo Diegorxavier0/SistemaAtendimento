@@ -23,7 +23,18 @@ namespace SistemaAtendimento
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao conectar: " + ex.Message);
-            }   
+            }
+        }
+
+        private void clienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCadastroCliente frmCadastroCliente = new FrmCadastroCliente();
+            frmCadastroCliente.ShowDialog();
+        }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
