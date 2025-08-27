@@ -62,7 +62,6 @@
             lblNome = new Label();
             txtCodigo = new TextBox();
             lblCodigo = new Label();
-            txtBairro = new TextBox();
             btnNovo = new Button();
             btnEditar = new Button();
             btnSalvar = new Button();
@@ -73,6 +72,7 @@
             btnPesquisar = new Button();
             grbListaClientes = new GroupBox();
             dgvClientes = new DataGridView();
+            txtBairro = new TextBox();
             grbDadosCliente.SuspendLayout();
             pnlSituacao.SuspendLayout();
             pnlTipoPessoa.SuspendLayout();
@@ -82,6 +82,7 @@
             // 
             // grbDadosCliente
             // 
+            grbDadosCliente.Controls.Add(txtBairro);
             grbDadosCliente.Controls.Add(lblSituacao);
             grbDadosCliente.Controls.Add(pnlSituacao);
             grbDadosCliente.Controls.Add(cbxEstado);
@@ -401,13 +402,6 @@
             lblCodigo.TabIndex = 0;
             lblCodigo.Text = "Código";
             // 
-            // txtBairro
-            // 
-            txtBairro.Location = new Point(16, 208);
-            txtBairro.Name = "txtBairro";
-            txtBairro.Size = new Size(176, 23);
-            txtBairro.TabIndex = 10;
-            // 
             // btnNovo
             // 
             btnNovo.Location = new Point(16, 320);
@@ -496,6 +490,13 @@
             dgvClientes.Size = new Size(832, 150);
             dgvClientes.TabIndex = 0;
             // 
+            // txtBairro
+            // 
+            txtBairro.Location = new Point(8, 200);
+            txtBairro.Name = "txtBairro";
+            txtBairro.Size = new Size(176, 23);
+            txtBairro.TabIndex = 10;
+            // 
             // FrmCadastroCliente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -510,7 +511,6 @@
             Controls.Add(btnSalvar);
             Controls.Add(btnEditar);
             Controls.Add(btnNovo);
-            Controls.Add(txtBairro);
             Controls.Add(grbDadosCliente);
             Name = "FrmCadastroCliente";
             Text = "Cadastro de Clientes";
@@ -556,7 +556,6 @@
         private TextBox txtNumero;
         private Label lblEndereco;
         private TextBox txtEndereco;
-        private TextBox txtBairro;
         private Label lblEstado;
         private ComboBox cbxEstado;
         private RadioButton rdbInativo;
@@ -573,5 +572,6 @@
         private Button btnPesquisar;
         private GroupBox grbListaClientes;
         private DataGridView dgvClientes;
+        private TextBox txtBairro;
     }
 }
