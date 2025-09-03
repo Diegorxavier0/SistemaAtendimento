@@ -526,7 +526,7 @@
             grbListaClientes.Controls.Add(dgvClientes);
             grbListaClientes.Location = new Point(8, 368);
             grbListaClientes.Name = "grbListaClientes";
-            grbListaClientes.Size = new Size(776, 176);
+            grbListaClientes.Size = new Size(776, 192);
             grbListaClientes.TabIndex = 29;
             grbListaClientes.TabStop = false;
             grbListaClientes.Text = "Lista de Clientes";
@@ -536,14 +536,14 @@
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvClientes.Location = new Point(0, 16);
             dgvClientes.Name = "dgvClientes";
-            dgvClientes.Size = new Size(832, 150);
+            dgvClientes.Size = new Size(832, 176);
             dgvClientes.TabIndex = 0;
             // 
             // FrmCadastroCliente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 555);
+            ClientSize = new Size(800, 600);
             Controls.Add(grbListaClientes);
             Controls.Add(btnPesquisar);
             Controls.Add(txtPesquisar);
