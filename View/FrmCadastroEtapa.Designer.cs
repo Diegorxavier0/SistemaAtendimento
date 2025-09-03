@@ -28,18 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            grbDadosEtapa = new GroupBox();
             SuspendLayout();
+            // 
+            // grbDadosEtapa
+            // 
+            grbDadosEtapa.Location = new Point(16, 8);
+            grbDadosEtapa.Name = "grbDadosEtapa";
+            grbDadosEtapa.Size = new Size(776, 148);
+            grbDadosEtapa.TabIndex = 0;
+            grbDadosEtapa.TabStop = false;
+            grbDadosEtapa.Text = "Dados da Etapa";
             // 
             // FrmCadastroEtapa
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(grbDadosEtapa);
             Name = "FrmCadastroEtapa";
             Text = "Cadastro de Etapas";
             ResumeLayout(false);
         }
 
         #endregion
+
+        private GroupBox grbDadosEtapa;
     }
 }

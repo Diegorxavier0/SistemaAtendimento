@@ -78,6 +78,7 @@
             etapasToolStripMenuItem.Name = "etapasToolStripMenuItem";
             etapasToolStripMenuItem.Size = new Size(184, 22);
             etapasToolStripMenuItem.Text = "Etapas";
+            etapasToolStripMenuItem.Click += etapasToolStripMenuItem_Click;
             // 
             // statusAtendimentoToolStripMenuItem
             // 
