@@ -42,6 +42,7 @@
             txtCodigo = new TextBox();
             lblCodigo = new Label();
             btnNovo = new Button();
+            imlIcones = new ImageList(components);
             btnCancelar = new Button();
             btnExcluir = new Button();
             btnSalvar = new Button();
@@ -50,7 +51,6 @@
             txtPesquisar = new TextBox();
             grbListaUsuarios = new GroupBox();
             dgvListaUsuarios = new DataGridView();
-            imlIcones = new ImageList(components);
             lblPesquisar = new Label();
             grbDadosUsuario.SuspendLayout();
             grbListaUsuarios.SuspendLayout();
@@ -172,6 +172,18 @@
             btnNovo.TextAlign = ContentAlignment.MiddleRight;
             btnNovo.UseVisualStyleBackColor = true;
             // 
+            // imlIcones
+            // 
+            imlIcones.ColorDepth = ColorDepth.Depth32Bit;
+            imlIcones.ImageStream = (ImageListStreamer)resources.GetObject("imlIcones.ImageStream");
+            imlIcones.TransparentColor = Color.Transparent;
+            imlIcones.Images.SetKeyName(0, "icone-cancelar.png");
+            imlIcones.Images.SetKeyName(1, "icone-editar.png");
+            imlIcones.Images.SetKeyName(2, "icone-excluir.png");
+            imlIcones.Images.SetKeyName(3, "icone-novo.png");
+            imlIcones.Images.SetKeyName(4, "icone-pesquisar.png");
+            imlIcones.Images.SetKeyName(5, "icone-salvar.png");
+            // 
             // btnCancelar
             // 
             btnCancelar.Font = new Font("Segoe UI", 10F);
@@ -250,7 +262,7 @@
             grbListaUsuarios.Controls.Add(dgvListaUsuarios);
             grbListaUsuarios.Location = new Point(8, 256);
             grbListaUsuarios.Name = "grbListaUsuarios";
-            grbListaUsuarios.Size = new Size(784, 172);
+            grbListaUsuarios.Size = new Size(728, 172);
             grbListaUsuarios.TabIndex = 7;
             grbListaUsuarios.TabStop = false;
             grbListaUsuarios.Text = "Lista de Usuários";
@@ -258,22 +270,10 @@
             // dgvListaUsuarios
             // 
             dgvListaUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvListaUsuarios.Location = new Point(-48, 16);
+            dgvListaUsuarios.Location = new Point(0, 16);
             dgvListaUsuarios.Name = "dgvListaUsuarios";
             dgvListaUsuarios.Size = new Size(888, 150);
             dgvListaUsuarios.TabIndex = 0;
-            // 
-            // imlIcones
-            // 
-            imlIcones.ColorDepth = ColorDepth.Depth32Bit;
-            imlIcones.ImageStream = (ImageListStreamer)resources.GetObject("imlIcones.ImageStream");
-            imlIcones.TransparentColor = Color.Transparent;
-            imlIcones.Images.SetKeyName(0, "icone-cancelar.png");
-            imlIcones.Images.SetKeyName(1, "icone-editar.png");
-            imlIcones.Images.SetKeyName(2, "icone-excluir.png");
-            imlIcones.Images.SetKeyName(3, "icone-novo.png");
-            imlIcones.Images.SetKeyName(4, "icone-pesquisar.png");
-            imlIcones.Images.SetKeyName(5, "icone-salvar.png");
             // 
             // lblPesquisar
             // 
@@ -301,6 +301,7 @@
             Controls.Add(grbDadosUsuario);
             Name = "FrmCadastroUsuario";
             Text = "Cadastro de Usuários";
+            Load += FrmCadastroUsuario_Load;
             grbDadosUsuario.ResumeLayout(false);
             grbDadosUsuario.PerformLayout();
             grbListaUsuarios.ResumeLayout(false);
