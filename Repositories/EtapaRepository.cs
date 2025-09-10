@@ -9,51 +9,52 @@ using SistemaAtendimento.Model;
 
 namespace SistemaAtendimento.Repositories
 {
-    public class UsuarioRepository
+    public class EtapaRepository
     {
-        public List<Usuarios> Listar()
+        // Método para listar todas as etapas
+        public List<Etapas> Listar()
         {
-            var usuarios = new List<Usuarios>();
+            var etapas = new List<Etapas>();
 
             using (var conexao = ConexaoDB.GetConexao())
             {
-                string sql = "SELECT * FROM Usuarios";
+                string sql = "SELECT * FROM Etapas";
+
                 using (var comando = new SqlCommand(sql, conexao))
                 {
                     conexao.Open();
+
                     using (var linhas = comando.ExecuteReader())
                     {
                         while (linhas.Read())
                         {
-                            usuarios.Add(new Usuarios()
+                            etapas.Add(new Etapas()
                             {
                                 Id = Convert.ToInt32(linhas["id"]),
                                 Nome = linhas["nome"].ToString(),
-                                Email = linhas["email"].ToString(),
-                                Senha = linhas["senha"].ToString(),
-                                Perfil = linhas["perfil"].ToString(),
+                                Ordem = linhas["ordem"].ToString(),
+                                Ativo = Convert.ToBoolean(linhas["ativo"])
                             });
                         }
                     }
                 }
             }
 
-            return usuarios; // agora o método fecha corretamente
+            return etapas;
         }
 
-        public void Inserir(Usuarios usuarios)
+        // Método para inserir uma nova etapa
+        public void Inserir(Etapas etapa)
         {
             using (var conexao = ConexaoDB.GetConexao())
             {
-                string sql = "INSERT INTO Usuarios (nome, email, senha, perfil) VALUES (@nome, @email, @senha, @perfil)";
-                // reparei que você estava usando "clientes" aqui, alterei para "Usuarios"
+                string sql = "INSERT INTO Etapas (nome, ordem, ativo) VALUES (@nome, @ordem, @ativo)";
 
                 using (var comando = new SqlCommand(sql, conexao))
                 {
-                    comando.Parameters.AddWithValue("@nome", usuarios.Nome);
-                    comando.Parameters.AddWithValue("@email", usuarios.Email);
-                    comando.Parameters.AddWithValue("@senha", usuarios.Senha);
-                    comando.Parameters.AddWithValue("@perfil", usuarios.Perfil);
+                    comando.Parameters.AddWithValue("@nome", etapa.Nome);
+                    comando.Parameters.AddWithValue("@ordem", etapa.Ordem);
+                    comando.Parameters.AddWithValue("@ativo", etapa.Ativo);
 
                     conexao.Open();
                     comando.ExecuteNonQuery();

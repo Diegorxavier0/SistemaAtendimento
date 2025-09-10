@@ -91,7 +91,7 @@
             pnlSituacao.Location = new Point(336, 88);
             pnlSituacao.Name = "pnlSituacao";
             pnlSituacao.Size = new Size(128, 32);
-            pnlSituacao.TabIndex = 6;
+            pnlSituacao.TabIndex = 4;
             // 
             // rdbInativo
             // 
@@ -198,7 +198,7 @@
             btnCancelar.Location = new Point(368, 192);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(96, 40);
-            btnCancelar.TabIndex = 2;
+            btnCancelar.TabIndex = 9;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleRight;
             btnCancelar.UseVisualStyleBackColor = true;
@@ -212,7 +212,7 @@
             btnExcluir.Location = new Point(280, 192);
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Size = new Size(80, 40);
-            btnExcluir.TabIndex = 3;
+            btnExcluir.TabIndex = 8;
             btnExcluir.Text = "Excluir";
             btnExcluir.TextAlign = ContentAlignment.MiddleRight;
             btnExcluir.UseVisualStyleBackColor = true;
@@ -226,7 +226,7 @@
             btnSalvar.Location = new Point(192, 192);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(80, 40);
-            btnSalvar.TabIndex = 4;
+            btnSalvar.TabIndex = 7;
             btnSalvar.Text = "Salvar";
             btnSalvar.TextAlign = ContentAlignment.MiddleRight;
             btnSalvar.UseVisualStyleBackColor = true;
@@ -277,7 +277,7 @@
             txtPesquisar.Location = new Point(480, 200);
             txtPesquisar.Name = "txtPesquisar";
             txtPesquisar.Size = new Size(240, 23);
-            txtPesquisar.TabIndex = 8;
+            txtPesquisar.TabIndex = 10;
             // 
             // btnPesquisar
             // 
@@ -286,7 +286,7 @@
             btnPesquisar.Location = new Point(728, 192);
             btnPesquisar.Name = "btnPesquisar";
             btnPesquisar.Size = new Size(51, 40);
-            btnPesquisar.TabIndex = 9;
+            btnPesquisar.TabIndex = 11;
             btnPesquisar.UseVisualStyleBackColor = true;
             // 
             // FrmCadastroEtapa
@@ -306,6 +306,7 @@
             Controls.Add(grbDadosEtapa);
             Name = "FrmCadastroEtapa";
             Text = "Cadastro de Etapas";
+            Load += FrmCadastroEtapa_Load;
             grbDadosEtapa.ResumeLayout(false);
             grbDadosEtapa.PerformLayout();
             pnlSituacao.ResumeLayout(false);

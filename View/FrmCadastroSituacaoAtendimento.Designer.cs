@@ -1,6 +1,6 @@
 ﻿namespace SistemaAtendimento.View
 {
-    partial class FrmCadastroStatusAtendimento
+    partial class FrmCadastroSituacaoAtendimento
     {
         /// <summary>
         /// Required designer variable.
@@ -28,18 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            grbDadosSituacaoAtendimento = new GroupBox();
             SuspendLayout();
             // 
-            // FrmCadastroStatusAtendimento
+            // grbDadosSituacaoAtendimento
+            // 
+            grbDadosSituacaoAtendimento.Location = new Point(9, 9);
+            grbDadosSituacaoAtendimento.Name = "grbDadosSituacaoAtendimento";
+            grbDadosSituacaoAtendimento.Size = new Size(783, 100);
+            grbDadosSituacaoAtendimento.TabIndex = 0;
+            grbDadosSituacaoAtendimento.TabStop = false;
+            grbDadosSituacaoAtendimento.Text = "Dados da Situação do Atendimento ";
+            // 
+            // FrmCadastroSituacaoAtendimento
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Name = "FrmCadastroStatusAtendimento";
-            Text = "Cadastros de Status de Atendimentos";
+            Controls.Add(grbDadosSituacaoAtendimento);
+            Name = "FrmCadastroSituacaoAtendimento";
+            Text = "Cadastros de Situação de Atendimentos";
             ResumeLayout(false);
         }
 
         #endregion
+
+        private GroupBox grbDadosSituacaoAtendimento;
     }
 }

@@ -2,6 +2,8 @@ using Microsoft.Data.SqlClient;
 using SistemaAtendimento.Database;
 using SistemaAtendimento.View;
 
+
+
 namespace SistemaAtendimento
 {
     public partial class FrmTelaPrincipal : Form
@@ -48,6 +50,12 @@ namespace SistemaAtendimento
         {
             FrmCadastroEtapa frmCadastroEtapa = new FrmCadastroEtapa();
             frmCadastroEtapa.ShowDialog();
+        }
+
+        private void situacaoAtendimentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCadastroSituacaoAtendimento frmCadastroSituacaoAtendimento = new FrmCadastroSituacaoAtendimento();
+            frmCadastroSituacaoAtendimento.ShowDialog();
         }
     }
 }
