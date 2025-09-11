@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SistemaAtendimento.Repositories;
 using SistemaAtendimento.View;
 
@@ -13,13 +10,13 @@ namespace SistemaAtendimento.Controller
         private FrmCadastroSituacaoAtendimento _frmCadastroSituacaoAtendimento;
         private SituacaoAtendimentoRepository _situacaoAtendimentoRepository;
 
-        public SituacaoAtendimentoController (FrmCadastroSituacaoAtendimento view)
+        public SituacaoAtendimentoController(FrmCadastroSituacaoAtendimento view)
         {
             _frmCadastroSituacaoAtendimento = view;
             _situacaoAtendimentoRepository = new SituacaoAtendimentoRepository();
         }
 
-        public void ListarSituacaoAtendimento()
+        public void ListarSituacaoAtendimentos()
         {
             try
             {
@@ -28,10 +25,8 @@ namespace SistemaAtendimento.Controller
             }
             catch (Exception ex)
             {
-                _frmCadastroSituacaoAtendimento.ExibirMensagem($"Erro ao carregar os clientes: {ex.Message}");
+                _frmCadastroSituacaoAtendimento.ExibirMensagem($"Erro ao carregar as situações de atendimento: {ex.Message}");
             }
-
         }
-
     }
 }

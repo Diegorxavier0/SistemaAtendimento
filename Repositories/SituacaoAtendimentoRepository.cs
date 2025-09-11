@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using SistemaAtendimento.Database;
 using SistemaAtendimento.Model;
@@ -17,7 +14,7 @@ namespace SistemaAtendimento.Repositories
 
             using (var conexao = ConexaoDB.GetConexao())
             {
-                string sql = "SELECT * FROM SituacaoAtendimentos";
+                string sql = "SELECT * FROM situacao_atendimentos";
 
                 using (var comando = new SqlCommand(sql, conexao))
                 {
@@ -33,38 +30,30 @@ namespace SistemaAtendimento.Repositories
                                 Nome = linhas["nome"].ToString(),
                                 Cor = linhas["cor"].ToString(),
                                 Ativo = Convert.ToBoolean(linhas["ativo"])
-
                             });
-
                         }
                     }
                 }
                 return situacaoAtendimentos;
             }
         }
+
         public void Inserir(SituacaoAtendimentos situacaoAtendimentos)
         {
             using (var conexao = ConexaoDB.GetConexao())
             {
-                string sql = "INSERT INTO situacaoAtendimentos (nome, cor, ativo) VALUES (@nome, @cor, @ativo)";
+                string sql = "INSERT INTO situacao_atendimentos (nome, cor, ativo) VALUES (@nome, @cor, @ativo)";
 
                 using (var comando = new SqlCommand(sql, conexao))
                 {
                     comando.Parameters.AddWithValue("@nome", situacaoAtendimentos.Nome);
                     comando.Parameters.AddWithValue("@cor", situacaoAtendimentos.Cor);
                     comando.Parameters.AddWithValue("@ativo", situacaoAtendimentos.Ativo);
-                   
+
                     conexao.Open();
                     comando.ExecuteNonQuery();
-
-                    
                 }
-
-
             }
         }
     }
 }
-
-    
-
