@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadastroSituacaoAtendimento));
             grbDadosSituacaoAtendimento = new GroupBox();
             pnlSituacao = new Panel();
+            rdbInativo = new RadioButton();
             rdbAtivo = new RadioButton();
             lblSituacao = new Label();
             txtNome = new TextBox();
@@ -40,8 +41,8 @@
             lblCor = new Label();
             lblNome = new Label();
             lblCodigo = new Label();
-            rdbInativo = new RadioButton();
             btnNovo = new Button();
+            imlIcones = new ImageList(components);
             btnEditar = new Button();
             btnSalvar = new Button();
             btnExcluir = new Button();
@@ -51,7 +52,6 @@
             lblPesquisar = new Label();
             grbListaSituacaoAtendimento = new GroupBox();
             dgvListaSituacaoAtendimento = new DataGridView();
-            imlIcones = new ImageList(components);
             grbDadosSituacaoAtendimento.SuspendLayout();
             pnlSituacao.SuspendLayout();
             grbListaSituacaoAtendimento.SuspendLayout();
@@ -82,7 +82,18 @@
             pnlSituacao.Location = new Point(272, 88);
             pnlSituacao.Name = "pnlSituacao";
             pnlSituacao.Size = new Size(136, 32);
-            pnlSituacao.TabIndex = 7;
+            pnlSituacao.TabIndex = 4;
+            // 
+            // rdbInativo
+            // 
+            rdbInativo.AutoSize = true;
+            rdbInativo.Location = new Point(74, 7);
+            rdbInativo.Name = "rdbInativo";
+            rdbInativo.Size = new Size(61, 19);
+            rdbInativo.TabIndex = 1;
+            rdbInativo.TabStop = true;
+            rdbInativo.Text = "Inativo";
+            rdbInativo.UseVisualStyleBackColor = true;
             // 
             // rdbAtivo
             // 
@@ -109,21 +120,21 @@
             txtNome.Location = new Point(184, 40);
             txtNome.Name = "txtNome";
             txtNome.Size = new Size(584, 23);
-            txtNome.TabIndex = 5;
+            txtNome.TabIndex = 2;
             // 
             // txtCor
             // 
             txtCor.Location = new Point(8, 96);
             txtCor.Name = "txtCor";
             txtCor.Size = new Size(257, 23);
-            txtCor.TabIndex = 4;
+            txtCor.TabIndex = 3;
             // 
             // txtCodigo
             // 
             txtCodigo.Location = new Point(8, 40);
             txtCodigo.Name = "txtCodigo";
             txtCodigo.Size = new Size(152, 23);
-            txtCodigo.TabIndex = 3;
+            txtCodigo.TabIndex = 1;
             // 
             // lblCor
             // 
@@ -152,17 +163,6 @@
             lblCodigo.TabIndex = 0;
             lblCodigo.Text = "Código";
             // 
-            // rdbInativo
-            // 
-            rdbInativo.AutoSize = true;
-            rdbInativo.Location = new Point(74, 7);
-            rdbInativo.Name = "rdbInativo";
-            rdbInativo.Size = new Size(61, 19);
-            rdbInativo.TabIndex = 1;
-            rdbInativo.TabStop = true;
-            rdbInativo.Text = "Inativo";
-            rdbInativo.UseVisualStyleBackColor = true;
-            // 
             // btnNovo
             // 
             btnNovo.Font = new Font("Segoe UI", 10F);
@@ -172,10 +172,22 @@
             btnNovo.Location = new Point(16, 176);
             btnNovo.Name = "btnNovo";
             btnNovo.Size = new Size(75, 40);
-            btnNovo.TabIndex = 1;
+            btnNovo.TabIndex = 5;
             btnNovo.Text = "Novo";
             btnNovo.TextAlign = ContentAlignment.MiddleRight;
             btnNovo.UseVisualStyleBackColor = true;
+            // 
+            // imlIcones
+            // 
+            imlIcones.ColorDepth = ColorDepth.Depth32Bit;
+            imlIcones.ImageStream = (ImageListStreamer)resources.GetObject("imlIcones.ImageStream");
+            imlIcones.TransparentColor = Color.Transparent;
+            imlIcones.Images.SetKeyName(0, "icone-cancelar.png");
+            imlIcones.Images.SetKeyName(1, "icone-editar.png");
+            imlIcones.Images.SetKeyName(2, "icone-excluir.png");
+            imlIcones.Images.SetKeyName(3, "icone-novo.png");
+            imlIcones.Images.SetKeyName(4, "icone-pesquisar.png");
+            imlIcones.Images.SetKeyName(5, "icone-salvar.png");
             // 
             // btnEditar
             // 
@@ -185,8 +197,8 @@
             btnEditar.ImageList = imlIcones;
             btnEditar.Location = new Point(104, 176);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(75, 40);
-            btnEditar.TabIndex = 2;
+            btnEditar.Size = new Size(80, 40);
+            btnEditar.TabIndex = 6;
             btnEditar.Text = "Editar";
             btnEditar.TextAlign = ContentAlignment.MiddleRight;
             btnEditar.UseVisualStyleBackColor = true;
@@ -199,8 +211,8 @@
             btnSalvar.ImageList = imlIcones;
             btnSalvar.Location = new Point(192, 176);
             btnSalvar.Name = "btnSalvar";
-            btnSalvar.Size = new Size(75, 40);
-            btnSalvar.TabIndex = 3;
+            btnSalvar.Size = new Size(80, 40);
+            btnSalvar.TabIndex = 7;
             btnSalvar.Text = "Salvar";
             btnSalvar.TextAlign = ContentAlignment.MiddleRight;
             btnSalvar.UseVisualStyleBackColor = true;
@@ -214,7 +226,7 @@
             btnExcluir.Location = new Point(280, 176);
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Size = new Size(80, 40);
-            btnExcluir.TabIndex = 4;
+            btnExcluir.TabIndex = 8;
             btnExcluir.Text = "Excluir";
             btnExcluir.TextAlign = ContentAlignment.MiddleRight;
             btnExcluir.UseVisualStyleBackColor = true;
@@ -228,7 +240,7 @@
             btnCancelar.Location = new Point(368, 176);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(96, 40);
-            btnCancelar.TabIndex = 5;
+            btnCancelar.TabIndex = 9;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleRight;
             btnCancelar.UseVisualStyleBackColor = true;
@@ -238,7 +250,7 @@
             txtPesquisar.Location = new Point(472, 184);
             txtPesquisar.Name = "txtPesquisar";
             txtPesquisar.Size = new Size(208, 23);
-            txtPesquisar.TabIndex = 8;
+            txtPesquisar.TabIndex = 10;
             // 
             // btnPesquisar
             // 
@@ -247,7 +259,7 @@
             btnPesquisar.Location = new Point(696, 176);
             btnPesquisar.Name = "btnPesquisar";
             btnPesquisar.Size = new Size(80, 40);
-            btnPesquisar.TabIndex = 9;
+            btnPesquisar.TabIndex = 11;
             btnPesquisar.UseVisualStyleBackColor = true;
             // 
             // lblPesquisar
@@ -277,18 +289,6 @@
             dgvListaSituacaoAtendimento.Size = new Size(840, 184);
             dgvListaSituacaoAtendimento.TabIndex = 0;
             // 
-            // imlIcones
-            // 
-            imlIcones.ColorDepth = ColorDepth.Depth32Bit;
-            imlIcones.ImageStream = (ImageListStreamer)resources.GetObject("imlIcones.ImageStream");
-            imlIcones.TransparentColor = Color.Transparent;
-            imlIcones.Images.SetKeyName(0, "icone-cancelar.png");
-            imlIcones.Images.SetKeyName(1, "icone-editar.png");
-            imlIcones.Images.SetKeyName(2, "icone-excluir.png");
-            imlIcones.Images.SetKeyName(3, "icone-novo.png");
-            imlIcones.Images.SetKeyName(4, "icone-pesquisar.png");
-            imlIcones.Images.SetKeyName(5, "icone-salvar.png");
-            // 
             // FrmCadastroSituacaoAtendimento
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -306,6 +306,7 @@
             Controls.Add(grbDadosSituacaoAtendimento);
             Name = "FrmCadastroSituacaoAtendimento";
             Text = "Cadastros de Situação de Atendimentos";
+            Load += FrmCadastroSituacaoAtendimento_Load;
             grbDadosSituacaoAtendimento.ResumeLayout(false);
             grbDadosSituacaoAtendimento.PerformLayout();
             pnlSituacao.ResumeLayout(false);

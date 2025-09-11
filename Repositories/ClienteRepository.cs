@@ -53,7 +53,7 @@ namespace SistemaAtendimento.Repositories
                 }
                 return clientes;
             }
-        }   public void Inserir(Clientes clientes)
+        }   public void Inserir(Clientes cliente)
         {
             using (var conexao = ConexaoDB.GetConexao())
             {
@@ -61,25 +61,24 @@ namespace SistemaAtendimento.Repositories
 
                 using (var comando = new SqlCommand(sql, conexao))
                 {
-                    comando.Parameters.AddWithValue("@nome", clientes.Nome);
-                    comando.Parameters.AddWithValue("@email", clientes.Email);
-                    comando.Parameters.AddWithValue("@cpf_cnpj", clientes.Cpf_Cnpj);
-                    comando.Parameters.AddWithValue("@tipo_pessoa", clientes.TipoPessoa);
-                    comando.Parameters.AddWithValue("@telefone", clientes.Telefone);
-                    comando.Parameters.AddWithValue("@celular", clientes.Celular);
-                    comando.Parameters.AddWithValue("@cep", clientes.Cep);
-                    comando.Parameters.AddWithValue("@endereco", clientes.Endereco);
-                    comando.Parameters.AddWithValue("@numero", clientes.Numero);
-                    comando.Parameters.AddWithValue("@complemento", clientes.Complemento);
-                    comando.Parameters.AddWithValue("@bairro", clientes.Bairro);
-                    comando.Parameters.AddWithValue("@cidade", clientes.Cidade);
-                    comando.Parameters.AddWithValue("@estado", clientes.Estado);
-                    comando.Parameters.AddWithValue("@ativo", clientes.Ativo);
+                    comando.Parameters.AddWithValue("@nome", cliente.Nome);
+                    comando.Parameters.AddWithValue("@email", cliente.Email);
+                    comando.Parameters.AddWithValue("@cpf_cnpj", cliente.Cpf_Cnpj);
+                    comando.Parameters.AddWithValue("@tipo_pessoa", cliente.TipoPessoa);
+                    comando.Parameters.AddWithValue("@telefone", cliente.Telefone);
+                    comando.Parameters.AddWithValue("@celular", cliente.Celular);
+                    comando.Parameters.AddWithValue("@cep", cliente.Cep);
+                    comando.Parameters.AddWithValue("@endereco", cliente.Endereco);
+                    comando.Parameters.AddWithValue("@numero", cliente.Numero);
+                    comando.Parameters.AddWithValue("@complemento", cliente.Complemento);
+                    comando.Parameters.AddWithValue("@bairro", cliente.Bairro);
+                    comando.Parameters.AddWithValue("@cidade", cliente.Cidade);
+                    comando.Parameters.AddWithValue("@estado", cliente.Estado);
+                    comando.Parameters.AddWithValue("@ativo", cliente.Ativo);
                     conexao.Open();
                     comando.ExecuteNonQuery();
 
-                    conexao.Open();
-                    comando.ExecuteNonQuery();
+                   
                 }
 
 
