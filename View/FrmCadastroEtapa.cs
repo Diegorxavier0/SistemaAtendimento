@@ -33,5 +33,94 @@ namespace SistemaAtendimento.View
         {
             dgvListaEtapas.DataSource = etapas;
         }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            Etapas etapa = new Etapas
+            {
+
+
+                Nome = txtNome.Text,
+                Ordem = txtOrdem.Text,
+                Ativo = rdbAtivo.Checked,
+
+            };
+
+            if (!ValidarDados(etapa))
+                return;
+
+            _etapaController.Salvar(etapa);
+        }
+
+        public bool ValidarDados(Etapas etapas)
+        {
+            if (string.IsNullOrWhiteSpace(txtNome.Text))
+            {
+                ExibirMensagem("O campo Nome é obrigatório.");
+                txtNome.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtOrdem.Text))
+            {
+                ExibirMensagem("O campo Ordem é obrigatório.");
+                txtOrdem.Focus();
+                return false;
+            }
+            return true;
+        }
+
+        //criando métodos
+
+        private void HabilitarCampos()
+        {
+            txtNome.ReadOnly = false;
+            txtOrdem.ReadOnly = false;
+            pnlSituacao.Enabled = true;
+
+            btnNovo.Enabled = false;
+            btnSalvar.Enabled = true;
+            btnCancelar.Enabled = true;
+
+        }
+
+        private void Limparcampos()
+        {
+            txtCodigo.Clear();
+            txtNome.Clear();
+            txtOrdem.Clear();
+            rdbAtivo.Checked = true;
+
+        }
+
+        public void DesabilitarCampos()
+        {
+            txtNome.ReadOnly = true;
+            txtOrdem.ReadOnly = true;
+            pnlSituacao.Enabled = false;
+
+
+
+
+            btnNovo.Enabled = true;
+            btnSalvar.Enabled = false;
+            btnCancelar.Enabled = false;
+            btnEditar.Enabled = false;
+            btnExcluir.Enabled = false;
+        }
+
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            DesabilitarCampos();
+        }
+
+      
+
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            DesabilitarCampos();
+        }
     }
 }
+

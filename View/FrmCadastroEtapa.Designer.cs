@@ -88,6 +88,7 @@
             // 
             pnlSituacao.Controls.Add(rdbInativo);
             pnlSituacao.Controls.Add(rdbAtivo);
+            pnlSituacao.Enabled = false;
             pnlSituacao.Location = new Point(336, 88);
             pnlSituacao.Name = "pnlSituacao";
             pnlSituacao.Size = new Size(128, 32);
@@ -100,13 +101,13 @@
             rdbInativo.Name = "rdbInativo";
             rdbInativo.Size = new Size(61, 19);
             rdbInativo.TabIndex = 4;
-            rdbInativo.TabStop = true;
             rdbInativo.Text = "Inativo";
             rdbInativo.UseVisualStyleBackColor = true;
             // 
             // rdbAtivo
             // 
             rdbAtivo.AutoSize = true;
+            rdbAtivo.Checked = true;
             rdbAtivo.Location = new Point(8, 8);
             rdbAtivo.Name = "rdbAtivo";
             rdbAtivo.Size = new Size(53, 19);
@@ -119,6 +120,7 @@
             // 
             txtOrdem.Location = new Point(16, 88);
             txtOrdem.Name = "txtOrdem";
+            txtOrdem.ReadOnly = true;
             txtOrdem.Size = new Size(304, 23);
             txtOrdem.TabIndex = 2;
             // 
@@ -126,6 +128,7 @@
             // 
             txtNome.Location = new Point(144, 40);
             txtNome.Name = "txtNome";
+            txtNome.ReadOnly = true;
             txtNome.Size = new Size(616, 23);
             txtNome.TabIndex = 1;
             // 
@@ -176,6 +179,7 @@
             btnNovo.Text = "Novo";
             btnNovo.TextAlign = ContentAlignment.MiddleRight;
             btnNovo.UseVisualStyleBackColor = true;
+          
             // 
             // imlIcones
             // 
@@ -191,6 +195,7 @@
             // 
             // btnCancelar
             // 
+            btnCancelar.Enabled = false;
             btnCancelar.Font = new Font("Segoe UI", 10F);
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
             btnCancelar.ImageIndex = 0;
@@ -202,9 +207,11 @@
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleRight;
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click_1;
             // 
             // btnExcluir
             // 
+            btnExcluir.Enabled = false;
             btnExcluir.Font = new Font("Segoe UI", 10F);
             btnExcluir.ImageAlign = ContentAlignment.MiddleLeft;
             btnExcluir.ImageIndex = 2;
@@ -219,6 +226,7 @@
             // 
             // btnSalvar
             // 
+            btnSalvar.Enabled = false;
             btnSalvar.Font = new Font("Segoe UI", 10F);
             btnSalvar.ImageAlign = ContentAlignment.MiddleLeft;
             btnSalvar.ImageIndex = 5;
@@ -230,9 +238,11 @@
             btnSalvar.Text = "Salvar";
             btnSalvar.TextAlign = ContentAlignment.MiddleRight;
             btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
             // 
             // btnEditar
             // 
+            btnEditar.Enabled = false;
             btnEditar.Font = new Font("Segoe UI", 10F);
             btnEditar.ImageAlign = ContentAlignment.MiddleLeft;
             btnEditar.ImageIndex = 1;
