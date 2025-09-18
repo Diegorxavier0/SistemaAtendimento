@@ -179,7 +179,7 @@
             btnNovo.Text = "Novo";
             btnNovo.TextAlign = ContentAlignment.MiddleRight;
             btnNovo.UseVisualStyleBackColor = true;
-          
+            btnNovo.Click += btnNovo_Click;
             // 
             // imlIcones
             // 
@@ -268,9 +268,9 @@
             // dgvListaEtapas
             // 
             dgvListaEtapas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvListaEtapas.Location = new Point(-8, 16);
+            dgvListaEtapas.Location = new Point(0, 16);
             dgvListaEtapas.Name = "dgvListaEtapas";
-            dgvListaEtapas.Size = new Size(784, 161);
+            dgvListaEtapas.Size = new Size(816, 225);
             dgvListaEtapas.TabIndex = 0;
             // 
             // lblPesquisar

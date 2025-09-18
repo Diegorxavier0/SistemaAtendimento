@@ -115,11 +115,16 @@ namespace SistemaAtendimento.View
             DesabilitarCampos();
         }
 
-      
+
 
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             DesabilitarCampos();
+        }
+
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            HabilitarCampos();
         }
     }
 }
