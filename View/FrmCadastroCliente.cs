@@ -63,7 +63,7 @@ namespace SistemaAtendimento
             if (!ValidarDados(cliente))
                 return;
 
-            if( string.IsNullOrWhiteSpace(txtCodigo.Text))
+            if (string.IsNullOrWhiteSpace(txtCodigo.Text))
             {
                 //novo cliente
                 _clienteController.Salvar(cliente);
@@ -76,9 +76,9 @@ namespace SistemaAtendimento
                 _clienteController.Atualizar(cliente);
             }
 
-           //_clienteController.Salvar(cliente);
+            //_clienteController.Salvar(cliente);
 
-            
+
         }
 
         public bool ValidarDados(Clientes clientes)
@@ -131,7 +131,7 @@ namespace SistemaAtendimento
 
             }
 
-            
+
 
 
 
@@ -172,7 +172,7 @@ namespace SistemaAtendimento
 
             if (string.IsNullOrWhiteSpace(cbxEstado.Text))
             {
-                ExibirMensagem("O campo Nome é obrigatório.");
+                ExibirMensagem("O campo Estado é obrigatório.");
                 cbxEstado.Focus();
                 return false;
             }
@@ -312,6 +312,7 @@ namespace SistemaAtendimento
                 btnEditar.Enabled = true;
                 btnNovo.Enabled = false;
                 btnCancelar.Enabled = true;
+                btnExcluir.Enabled = true;
             }
         }
 
@@ -319,6 +320,25 @@ namespace SistemaAtendimento
         {
             HabilitarCampos();
             btnEditar.Enabled = false;
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrWhiteSpace(txtCodigo.Text))
+            {
+                ExibirMensagem("Selecione um cliente para excluir.");
+                return;
+            }
+
+
+            DialogResult resultado = MessageBox.Show("Tem certeza que deseja excluir este cliente?", "Confirmação de Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                int id = Convert.ToInt32(txtCodigo.Text);
+                _clienteController.Excluir(id);
+              
+            }
         }
     }
 

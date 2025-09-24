@@ -30,7 +30,7 @@ namespace SistemaAtendimento.View
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-           SituacaoAtendimentos situacaoAtendimentos = new SituacaoAtendimentos
+            SituacaoAtendimentos situacaoAtendimentos = new SituacaoAtendimentos
             {
                 Nome = txtNome.Text,
                 Cor = txtCor.Text,
@@ -38,10 +38,10 @@ namespace SistemaAtendimento.View
 
             };
 
-            if (!ValidarDados(cliente))
-                return;
+            //if (!ValidarDados(situacaoAtendimentos))
+            //    return;
 
-            if (string.IsNullOrWhiteSpace(txtCodigo.Text))
+         /*   if (string.IsNullOrWhiteSpace(txtCodigo.Text))
             {
                 //novo cliente
                 _clienteController.Salvar(cliente);
@@ -69,7 +69,8 @@ namespace SistemaAtendimento.View
                 txtCor.Focus();
                 return false;
             }
-
+*/
             //terminar proxima aula
         }
     }
+}
