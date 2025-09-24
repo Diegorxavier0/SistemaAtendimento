@@ -50,6 +50,25 @@ namespace SistemaAtendimento.Controller
             {
                 _frmCadastroEtapa.ExibirMensagem($"Erro ao Cadastrar o Cliente: {ex.Message}");
             }
+        } 
+        
+        public void Atualizar(Etapas etapa)
+        {
+
+            try
+            {
+                _etapaRepository.Atualizar(etapa);
+                _frmCadastroEtapa.ExibirMensagem($"Cliente atualizado com Sucesso:");
+
+                //atualizar dataGrid 
+                ListarEtapas();
+
+                _frmCadastroEtapa.DesabilitarCampos();
+            }
+            catch (Exception ex)
+            {
+                _frmCadastroEtapa.ExibirMensagem($"Erro ao atualizar o Cliente: {ex.Message}");
+            }
         }
     }
 }

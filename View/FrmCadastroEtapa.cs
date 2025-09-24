@@ -46,10 +46,18 @@ namespace SistemaAtendimento.View
 
             };
 
-            if (!ValidarDados(etapa))
-                return;
-
-            _etapaController.Salvar(etapa);
+            if (string.IsNullOrWhiteSpace(txtCodigo.Text))
+            {
+               
+                _etapaController.Salvar(etapa);
+            }
+            else
+            {
+                //editar cliente
+                etapa.Id = Convert.ToInt32(txtCodigo.Text);
+                //implementar metodo editar no controller e repository
+                _etapaController.Atualizar(etapa);
+            }
         }
 
         public bool ValidarDados(Etapas etapas)
@@ -125,6 +133,30 @@ namespace SistemaAtendimento.View
         private void btnNovo_Click(object sender, EventArgs e)
         {
             HabilitarCampos();
+        }
+
+        private void dgvListaEtapas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == 0)
+            {
+                DataGridViewRow LinhaSelecionada = dgvListaEtapas.Rows[e.RowIndex];
+                txtCodigo.Text = LinhaSelecionada.Cells["Id"].Value.ToString();
+                txtNome.Text = LinhaSelecionada.Cells["Nome"].Value.ToString();
+                txtOrdem.Text = LinhaSelecionada.Cells["Ordem"].Value.ToString();
+                rdbAtivo.Checked = Convert.ToBoolean(LinhaSelecionada.Cells["Ativo"].Value);
+                rdbInativo.Checked = !Convert.ToBoolean(LinhaSelecionada.Cells["Ativo"].Value);
+
+                // Habilitar os botões de editar e excluir
+                btnEditar.Enabled = true;
+                btnNovo.Enabled = false;
+                btnCancelar.Enabled = true;
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            HabilitarCampos();
+            btnEditar.Enabled = false;
         }
     }
 }
