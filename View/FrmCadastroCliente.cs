@@ -62,8 +62,23 @@ namespace SistemaAtendimento
 
             if (!ValidarDados(cliente))
                 return;
-            _clienteController.Salvar(cliente);
 
+            if( string.IsNullOrWhiteSpace(txtCodigo.Text))
+            {
+                //novo cliente
+                _clienteController.Salvar(cliente);
+            }
+            else
+            {
+                //editar cliente
+                cliente.Id = Convert.ToInt32(txtCodigo.Text);
+                //implementar metodo editar no controller e repository
+                _clienteController.Atualizar(cliente);
+            }
+
+           //_clienteController.Salvar(cliente);
+
+            
         }
 
         public bool ValidarDados(Clientes clientes)
@@ -116,64 +131,7 @@ namespace SistemaAtendimento
 
             }
 
-            //            Console.Write("Digite o CPF: ");
-            //            string cpf = Console.ReadLine();
-
-            //            cpf = Regex.Replace(cpf, "[^0-9]", "");
-
-            //            if (cpf.Length != 11)
-            //            {
-            //                Console.WriteLine("CPF deve conter 11 digitos");
-            //                return;
-            //            }
-
-            //            if (cpf.Distinct().Count() == 1)
-            //            {
-            //                Console.WriteLine("CPF inválido! Números repetidos não são permitidos");
-            //                return;
-            //            }
-
-            //            int digX = CalculaDV(cpf, 9, 10);
-            //            int digY = CalculaDV(cpf, 10, 11);
-
-            //            if (
-            //                int.Parse(cpf[9].ToString()) == digX &&
-            //                int.Parse(cpf[10].ToString()) == digY
-            //               )
-            //            {
-            //                Console.WriteLine("CPF VÁLIDO!");
-            //            }
-            //            else
-            //            {
-            //                Console.WriteLine("CPF INVÁLIDO!");
-            //            }
-            //        }
-
-            //        public static int CalculaDV(string cpf, int qtdeNumeros, int peso)
-            //        {
-            //            int soma = 0;
-            //            char[] cpfVetor = cpf.ToCharArray();
-
-            //            for (int i = 0; i < qtdeNumeros; i++)
-            //            {
-            //                soma += int.Parse(cpfVetor[i].ToString()) * (peso - i);
-            //            }
-
-            //            int resto = soma % 11;
-            //            int digito = 0;
-
-            //            if (resto >= 2)
-            //            {
-            //                digito = 11 - resto;
-            //            }
-
-            //            return digito;
-            //        }
-            //    }
-            //}
-
-
-
+            
 
 
 
@@ -239,6 +197,12 @@ namespace SistemaAtendimento
             }
         }
 
+
+
+
+
+
+
         private void HabilitarCampos()
         {
             txtNome.ReadOnly = false;
@@ -262,7 +226,7 @@ namespace SistemaAtendimento
 
         }
 
-        private void Limparcampos()
+        private void LimparCampos()
         {
             txtCodigo.Clear();
             txtNome.Clear();
@@ -283,7 +247,7 @@ namespace SistemaAtendimento
 
         public void DesabilitarCampos()
         {
-            Limparcampos();
+            LimparCampos();
             txtNome.ReadOnly = true;
             txtEmail.ReadOnly = true;
             txtTelefone.ReadOnly = true;
@@ -314,6 +278,47 @@ namespace SistemaAtendimento
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             DesabilitarCampos();
+        }
+
+
+        //evento duplo clique no datagrid, para editar 
+        private void dgvClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow LinhaSelecionada = dgvClientes.Rows[e.RowIndex];
+
+                txtCodigo.Text = LinhaSelecionada.Cells["Id"].Value.ToString();
+                txtNome.Text = LinhaSelecionada.Cells["Nome"].Value.ToString();
+                txtEmail.Text = LinhaSelecionada.Cells["Email"].Value.ToString();
+                txtCpfCnpj.Text = LinhaSelecionada.Cells["Cpf_Cnpj"].Value.ToString();
+                txtTelefone.Text = LinhaSelecionada.Cells["Telefone"].Value.ToString();
+                txtCelular.Text = LinhaSelecionada.Cells["Celular"].Value.ToString();
+                txtCep.Text = LinhaSelecionada.Cells["Cep"].Value.ToString();
+                txtEndereco.Text = LinhaSelecionada.Cells["Endereco"].Value.ToString();
+                txtNumero.Text = LinhaSelecionada.Cells["Numero"].Value.ToString();
+                txtComplemento.Text = LinhaSelecionada.Cells["Complemento"].Value.ToString();
+                txtBairro.Text = LinhaSelecionada.Cells["Bairro"].Value.ToString();
+                txtCidade.Text = LinhaSelecionada.Cells["Cidade"].Value.ToString();
+                cbxEstado.Text = LinhaSelecionada.Cells["Estado"].Value.ToString();
+
+                rdbFisica.Checked = LinhaSelecionada.Cells["TipoPessoa"].Value.ToString() == "F";
+                rdbJuridico.Checked = LinhaSelecionada.Cells["TipoPessoa"].Value.ToString() == "J";
+
+                rdbAtivo.Checked = Convert.ToBoolean(LinhaSelecionada.Cells["Ativo"].Value);
+                rdbInativo.Checked = !Convert.ToBoolean(LinhaSelecionada.Cells["Ativo"].Value);
+
+                // Habilitar os botões de editar e excluir
+                btnEditar.Enabled = true;
+                btnNovo.Enabled = false;
+                btnCancelar.Enabled = true;
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            HabilitarCampos();
+            btnEditar.Enabled = false;
         }
     }
 
