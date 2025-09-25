@@ -79,6 +79,7 @@
             // 
             pnlSituacao.Controls.Add(rdbInativo);
             pnlSituacao.Controls.Add(rdbAtivo);
+            pnlSituacao.Enabled = false;
             pnlSituacao.Location = new Point(272, 88);
             pnlSituacao.Name = "pnlSituacao";
             pnlSituacao.Size = new Size(136, 32);
@@ -119,6 +120,7 @@
             // 
             txtNome.Location = new Point(184, 40);
             txtNome.Name = "txtNome";
+            txtNome.ReadOnly = true;
             txtNome.Size = new Size(584, 23);
             txtNome.TabIndex = 2;
             // 
@@ -126,6 +128,7 @@
             // 
             txtCor.Location = new Point(8, 96);
             txtCor.Name = "txtCor";
+            txtCor.ReadOnly = true;
             txtCor.Size = new Size(257, 23);
             txtCor.TabIndex = 3;
             // 
@@ -133,6 +136,7 @@
             // 
             txtCodigo.Location = new Point(8, 40);
             txtCodigo.Name = "txtCodigo";
+            txtCodigo.ReadOnly = true;
             txtCodigo.Size = new Size(152, 23);
             txtCodigo.TabIndex = 1;
             // 
@@ -176,6 +180,7 @@
             btnNovo.Text = "Novo";
             btnNovo.TextAlign = ContentAlignment.MiddleRight;
             btnNovo.UseVisualStyleBackColor = true;
+            btnNovo.Click += btnNovo_Click;
             // 
             // imlIcones
             // 
@@ -191,6 +196,7 @@
             // 
             // btnEditar
             // 
+            btnEditar.Enabled = false;
             btnEditar.Font = new Font("Segoe UI", 10F);
             btnEditar.ImageAlign = ContentAlignment.MiddleLeft;
             btnEditar.ImageIndex = 1;
@@ -205,6 +211,7 @@
             // 
             // btnSalvar
             // 
+            btnSalvar.Enabled = false;
             btnSalvar.Font = new Font("Segoe UI", 10F);
             btnSalvar.ImageAlign = ContentAlignment.MiddleLeft;
             btnSalvar.ImageIndex = 5;
@@ -220,6 +227,7 @@
             // 
             // btnExcluir
             // 
+            btnExcluir.Enabled = false;
             btnExcluir.Font = new Font("Segoe UI", 10F);
             btnExcluir.ImageAlign = ContentAlignment.MiddleLeft;
             btnExcluir.ImageIndex = 2;
@@ -234,6 +242,7 @@
             // 
             // btnCancelar
             // 
+            btnCancelar.Enabled = false;
             btnCancelar.Font = new Font("Segoe UI", 10F);
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
             btnCancelar.ImageIndex = 0;
@@ -245,11 +254,13 @@
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleRight;
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // txtPesquisar
             // 
             txtPesquisar.Location = new Point(472, 184);
             txtPesquisar.Name = "txtPesquisar";
+            txtPesquisar.ReadOnly = true;
             txtPesquisar.Size = new Size(208, 23);
             txtPesquisar.TabIndex = 10;
             // 

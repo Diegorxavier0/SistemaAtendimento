@@ -38,22 +38,23 @@ namespace SistemaAtendimento.View
 
             };
 
-            //if (!ValidarDados(situacaoAtendimentos))
-            //    return;
+            if (!ValidarDados(situacaoAtendimentos))
+                return;
 
-         /*   if (string.IsNullOrWhiteSpace(txtCodigo.Text))
-            {
-                //novo cliente
-                _clienteController.Salvar(cliente);
-            }
-            else
-            {
-                //editar cliente
-                cliente.Id = Convert.ToInt32(txtCodigo.Text);
-                //implementar metodo editar no controller e repository
-                _clienteController.Atualizar(cliente);
-            }
+            // if (string.IsNullOrWhiteSpace(txtCodigo.Text))
+            //{
+            //novo cliente
+            _situacaoAtendimentoController.Salvar(situacaoAtendimentos);
         }
+           // }
+           //  else
+           // {
+           //editar cliente
+           //  situacaoAtendimento.Id = Convert.ToInt32(txtCodigo.Text);
+           //implementar metodo editar no controller e repository
+           // _situacaoAtendimentoController.Atualizar(situacaoAtendimentos);
+           //}
+           // }
         public bool ValidarDados(SituacaoAtendimentos situacaoAtendimentos)
         {
             if (string.IsNullOrWhiteSpace(txtNome.Text))
@@ -69,8 +70,52 @@ namespace SistemaAtendimento.View
                 txtCor.Focus();
                 return false;
             }
-*/
-            //terminar proxima aula
+
+            return true; // Retorna true se passou nas validações
+        }
+
+        private void HabilitarCampos()
+        {
+            txtNome.ReadOnly = false;
+            txtCor.ReadOnly = false;
+            pnlSituacao.Enabled = true;
+
+            btnNovo.Enabled = false;
+            btnSalvar.Enabled = true;
+            btnCancelar.Enabled = true;
+
+        }
+
+        private void LimparCampos()
+        {
+            txtCodigo.Clear();
+            txtNome.Clear();
+            txtCor.Clear();
+            rdbAtivo.Checked = true;
+        }
+
+        public void DesabilitarCampos()
+        {
+            LimparCampos();
+            txtNome.ReadOnly = true;
+            txtCor.ReadOnly = true;
+            pnlSituacao.Enabled = false;
+
+            btnNovo.Enabled = true;
+            btnSalvar.Enabled = false;
+            btnCancelar.Enabled = false;
+            btnEditar.Enabled = false;
+            btnExcluir.Enabled = false;
+        }
+
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            HabilitarCampos();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            DesabilitarCampos();
         }
     }
 }
