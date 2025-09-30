@@ -46,15 +46,15 @@ namespace SistemaAtendimento.View
             //novo cliente
             _situacaoAtendimentoController.Salvar(situacaoAtendimentos);
         }
-           // }
-           //  else
-           // {
-           //editar cliente
-           //  situacaoAtendimento.Id = Convert.ToInt32(txtCodigo.Text);
-           //implementar metodo editar no controller e repository
-           // _situacaoAtendimentoController.Atualizar(situacaoAtendimentos);
-           //}
-           // }
+        // }
+        //  else
+        // {
+        //editar cliente
+        //  situacaoAtendimento.Id = Convert.ToInt32(txtCodigo.Text);
+        //implementar metodo editar no controller e repository
+        // _situacaoAtendimentoController.Atualizar(situacaoAtendimentos);
+        //}
+        // }
         public bool ValidarDados(SituacaoAtendimentos situacaoAtendimentos)
         {
             if (string.IsNullOrWhiteSpace(txtNome.Text))
@@ -116,6 +116,52 @@ namespace SistemaAtendimento.View
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             DesabilitarCampos();
+        }
+
+        private void dgvListaSituacaoAtendimento_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow LinhaSelecionada = dgvListaSituacaoAtendimento.Rows[e.RowIndex];
+
+                txtCodigo.Text = LinhaSelecionada.Cells["Id"].Value.ToString();
+                txtNome.Text = LinhaSelecionada.Cells["Nome"].Value.ToString();
+                txtCor.Text = LinhaSelecionada.Cells["Cor"].Value.ToString();
+
+                rdbAtivo.Checked = Convert.ToBoolean(LinhaSelecionada.Cells["Ativo"].Value);
+                rdbInativo.Checked = !Convert.ToBoolean(LinhaSelecionada.Cells["Ativo"].Value);
+
+                // Habilitar os botões de editar e excluir
+                btnEditar.Enabled = true;
+                btnNovo.Enabled = false;
+                btnCancelar.Enabled = true;
+                btnExcluir.Enabled = true;
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            HabilitarCampos();
+            btnEditar.Enabled = false;
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCodigo.Text))
+            {
+                ExibirMensagem("Selecione uma Situação de Atendimento.");
+                return;
+            }
+
+
+            DialogResult resultado = MessageBox.Show("Tem certeza que deseja excluir esta situação?", "Confirmação de Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                int id = Convert.ToInt32(txtCodigo.Text);
+                _situacaoAtendimentoController.Excluir(id);//arrumar no controller
+
+            }
         }
     }
 }

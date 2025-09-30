@@ -47,6 +47,44 @@ namespace SistemaAtendimento.Controller
             {
                 _frmCadastroSituacaoAtendimento.ExibirMensagem($"Erro ao Cadastrar a Situacao de Atendimento: {ex.Message}");
             }
+
+
+        }
+        public void Atualizar(SituacaoAtendimentos situacaoAtendimento)
+        {
+
+            try
+            {
+                _situacaoAtendimentoRepository.Atualizar(situacaoAtendimento);
+                _frmCadastroSituacaoAtendimento.ExibirMensagem($" Situacao de Atendimento atualizada com Sucesso:");
+
+                //atualizar dataGrid 
+                ListarSituacaoAtendimentos();
+
+                _frmCadastroSituacaoAtendimento.DesabilitarCampos();
+            }
+            catch (Exception ex)
+            {
+                _frmCadastroSituacaoAtendimento.ExibirMensagem($"Erro ao  Atualizar Situacao de Atendimento: {ex.Message}");
+            }
+
+
+        }
+
+        public void Excluir(int id)
+        {
+            try
+            {
+                _situacaoAtendimentoRepository.Excluir(id);
+                _frmCadastroSituacaoAtendimento.ExibirMensagem($"Situação Atendimento excluído com Sucesso:");
+                //atualizar dataGrid 
+                ListarSituacaoAtendimentos();
+                _frmCadastroSituacaoAtendimento.DesabilitarCampos();
+            }
+            catch (Exception ex)
+            {
+                _frmCadastroSituacaoAtendimento.ExibirMensagem($"Erro ao excluir Situação Atendimento: {ex.Message}");
+            }
         }
     }
 }

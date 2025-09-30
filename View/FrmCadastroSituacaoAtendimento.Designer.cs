@@ -208,6 +208,7 @@
             btnEditar.Text = "Editar";
             btnEditar.TextAlign = ContentAlignment.MiddleRight;
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnSalvar
             // 
@@ -239,6 +240,7 @@
             btnExcluir.Text = "Excluir";
             btnExcluir.TextAlign = ContentAlignment.MiddleRight;
             btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // btnCancelar
             // 
@@ -300,6 +302,7 @@
             dgvListaSituacaoAtendimento.Name = "dgvListaSituacaoAtendimento";
             dgvListaSituacaoAtendimento.Size = new Size(840, 184);
             dgvListaSituacaoAtendimento.TabIndex = 0;
+            dgvListaSituacaoAtendimento.CellDoubleClick += dgvListaSituacaoAtendimento_CellDoubleClick;
             // 
             // FrmCadastroSituacaoAtendimento
             // 
