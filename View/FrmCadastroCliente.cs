@@ -343,52 +343,104 @@ namespace SistemaAtendimento
             }
         }
 
-        private async Task BuscarEnderecoporCep(string cep)
-        {
-            try
-            {
-                cep = cep.Replace("-", "").Trim();//replace troca o - por vazio, trim remove espaços
+      private async Task BuscarEnderecoPorCep(string cep)
 
-                using (HttpClient client = new HttpClient())//HttpClient para fazer requisições http
+{
+
+    try
+
+    {
+
+        cep = cep.Replace("-", "").Trim();
+ 
+        using (HttpClient client = new HttpClient())
+
+        {
+
+            string url = $"https://viacep.com.br/ws/{cep}/json/";
+ 
+            var response = await client.GetAsync(url);
+ 
+            if (response.IsSuccessStatusCode)
+
+            {
+
+                string json = await response.Content.ReadAsStringAsync();
+
+                var dadosEndereco = JsonConvert.DeserializeObject<Endereco>(json);
+ 
+                if (dadosEndereco == null || dadosEndereco.Erro)
+
                 {
-                    string url = $"https://viacep.com.br/ws/{cep}/json/";
-                    //aleregar o cep fixo acima para o cep digitado
 
-                    var response = await client.GetAsync(url);//await espera a resposta da requisição
-                    //busca la na url e joga na variavl response
+                    ExibirMensagem("CEP inválido ou não encontrado.");
 
-                    if(response.IsSuccessStatusCode)
-                    {
-                        string json = await response.Content.ReadAsStringAsync();
+                    return;
 
-                        dynamic ? dadosEndereco = JsonConvert.DeserializeObject(json);
-
-                       
-                            txtEndereco.Text = dadosEndereco?.logradouro;
-                            txtBairro.Text = dadosEndereco?.bairro;
-                            txtCidade.Text = dadosEndereco?.localidade;
-                            cbxEstado.Text = dadosEndereco?.uf;
-                            
-                       
-                    }
-
-                    //string json = await response.Content.ReadAsStringAsync();
                 }
+ 
+                txtEndereco.Text = dadosEndereco.Logradouro;
+
+                txtBairro.Text = dadosEndereco.Bairro;
+
+                txtCidade.Text = dadosEndereco.Localidade;
+
+                cbxEstado.Text = dadosEndereco.Uf;
+
             }
-            catch (Exception ex)
+
+            else
+
             {
-                ExibirMensagem($"Erro ao buscar o endereço: {ex.Message}");
+
+                ExibirMensagem("Erro na comunicação com o serviço de CEP.");
+
             }
+
         }
 
-        private async void txtCep_Leave(object sender, EventArgs e)
-        {
-            if(!string.IsNullOrEmpty(txtCep.Text))//! inverte a resposta da função IsNullOrEmpty, se o campo nao estiver nulo ou vazio 
-            {
-                //chamar o metodo para buscar o endereço
-               await BuscarEnderecoporCep(txtCep.Text);
-            }
-        }
+    }
+
+    catch (Exception ex)
+
+    {
+
+        ExibirMensagem($"Erro ao buscar o endereço: {ex.Message}");
+
+    }
+
+}
+ 
+private async void txtCep_Leave(object sender, EventArgs e)
+
+{
+
+    if (!string.IsNullOrEmpty(txtCep.Text))
+
+    { 
+
+        await BuscarEnderecoPorCep(txtCep.Text);
+
+    }
+
+}
+ 
+public class Endereco
+
+{
+
+    public string? Logradouro { get; set; }
+
+    public string? Bairro { get; set; }
+
+    public string? Localidade { get; set; }
+
+    public string? Uf { get; set; }
+
+    public bool Erro { get; set; }  // Indica se houve erro na busca
+
+}
+ 
     }
 
 

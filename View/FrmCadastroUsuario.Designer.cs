@@ -31,7 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadastroUsuario));
             grbDadosUsuario = new GroupBox();
-            cbxPerfl = new ComboBox();
+            cbxPerfil = new ComboBox();
             txtSenha = new TextBox();
             txtNome = new TextBox();
             txtEmail = new TextBox();
@@ -59,7 +59,7 @@
             // 
             // grbDadosUsuario
             // 
-            grbDadosUsuario.Controls.Add(cbxPerfl);
+            grbDadosUsuario.Controls.Add(cbxPerfil);
             grbDadosUsuario.Controls.Add(txtSenha);
             grbDadosUsuario.Controls.Add(txtNome);
             grbDadosUsuario.Controls.Add(txtEmail);
@@ -76,19 +76,21 @@
             grbDadosUsuario.TabStop = false;
             grbDadosUsuario.Text = "Dados do Usuário";
             // 
-            // cbxPerfl
+            // cbxPerfil
             // 
-            cbxPerfl.FormattingEnabled = true;
-            cbxPerfl.Items.AddRange(new object[] { "Usuário", "Administrador" });
-            cbxPerfl.Location = new Point(248, 104);
-            cbxPerfl.Name = "cbxPerfl";
-            cbxPerfl.Size = new Size(256, 23);
-            cbxPerfl.TabIndex = 4;
+            cbxPerfil.Enabled = false;
+            cbxPerfil.FormattingEnabled = true;
+            cbxPerfil.Items.AddRange(new object[] { "Usuário", "Administrador" });
+            cbxPerfil.Location = new Point(248, 104);
+            cbxPerfil.Name = "cbxPerfil";
+            cbxPerfil.Size = new Size(256, 23);
+            cbxPerfil.TabIndex = 4;
             // 
             // txtSenha
             // 
             txtSenha.Location = new Point(8, 104);
             txtSenha.Name = "txtSenha";
+            txtSenha.ReadOnly = true;
             txtSenha.Size = new Size(224, 23);
             txtSenha.TabIndex = 3;
             // 
@@ -96,6 +98,7 @@
             // 
             txtNome.Location = new Point(184, 48);
             txtNome.Name = "txtNome";
+            txtNome.ReadOnly = true;
             txtNome.Size = new Size(224, 23);
             txtNome.TabIndex = 1;
             // 
@@ -103,6 +106,7 @@
             // 
             txtEmail.Location = new Point(432, 48);
             txtEmail.Name = "txtEmail";
+            txtEmail.ReadOnly = true;
             txtEmail.Size = new Size(344, 23);
             txtEmail.TabIndex = 2;
             // 
@@ -146,6 +150,7 @@
             // 
             txtCodigo.Location = new Point(8, 48);
             txtCodigo.Name = "txtCodigo";
+            txtCodigo.ReadOnly = true;
             txtCodigo.Size = new Size(152, 23);
             txtCodigo.TabIndex = 0;
             // 
@@ -171,6 +176,7 @@
             btnNovo.Text = "Novo";
             btnNovo.TextAlign = ContentAlignment.MiddleRight;
             btnNovo.UseVisualStyleBackColor = true;
+            btnNovo.Click += btnNovo_Click;
             // 
             // imlIcones
             // 
@@ -186,6 +192,7 @@
             // 
             // btnCancelar
             // 
+            btnCancelar.Enabled = false;
             btnCancelar.Font = new Font("Segoe UI", 10F);
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
             btnCancelar.ImageIndex = 0;
@@ -197,9 +204,11 @@
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleRight;
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnExcluir
             // 
+            btnExcluir.Enabled = false;
             btnExcluir.Font = new Font("Segoe UI", 10F);
             btnExcluir.ImageAlign = ContentAlignment.MiddleLeft;
             btnExcluir.ImageIndex = 2;
@@ -211,9 +220,11 @@
             btnExcluir.Text = "Excluir";
             btnExcluir.TextAlign = ContentAlignment.MiddleRight;
             btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // btnSalvar
             // 
+            btnSalvar.Enabled = false;
             btnSalvar.Font = new Font("Segoe UI", 10F);
             btnSalvar.ImageAlign = ContentAlignment.MiddleLeft;
             btnSalvar.ImageIndex = 5;
@@ -225,9 +236,11 @@
             btnSalvar.Text = "Salvar";
             btnSalvar.TextAlign = ContentAlignment.MiddleRight;
             btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
             // 
             // btnEditar
             // 
+            btnEditar.Enabled = false;
             btnEditar.Font = new Font("Segoe UI", 10F);
             btnEditar.ImageAlign = ContentAlignment.MiddleLeft;
             btnEditar.ImageIndex = 1;
@@ -239,6 +252,7 @@
             btnEditar.Text = "Editar";
             btnEditar.TextAlign = ContentAlignment.MiddleRight;
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnPesquisar
             // 
@@ -274,6 +288,7 @@
             dgvListaUsuarios.Name = "dgvListaUsuarios";
             dgvListaUsuarios.Size = new Size(888, 150);
             dgvListaUsuarios.TabIndex = 0;
+            dgvListaUsuarios.CellDoubleClick += dgvListaUsuarios_CellDoubleClick;
             // 
             // lblPesquisar
             // 
@@ -322,7 +337,7 @@
         private Label lblEmail;
         private Label lblSenha;
         private Label lblPerfil;
-        private ComboBox cbxPerfl;
+        private ComboBox cbxPerfil;
         private Button btnNovo;
         private Button btnCancelar;
         private Button btnExcluir;
