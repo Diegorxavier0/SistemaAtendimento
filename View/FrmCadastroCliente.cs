@@ -5,12 +5,14 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaAtendimento.Controller;
 using SistemaAtendimento.Model;
+using Newtonsoft.Json;
 
 namespace SistemaAtendimento
 {
@@ -324,7 +326,7 @@ namespace SistemaAtendimento
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(txtCodigo.Text))
+            if (string.IsNullOrWhiteSpace(txtCodigo.Text))
             {
                 ExibirMensagem("Selecione um cliente para excluir.");
                 return;
@@ -337,7 +339,54 @@ namespace SistemaAtendimento
             {
                 int id = Convert.ToInt32(txtCodigo.Text);
                 _clienteController.Excluir(id);
-              
+
+            }
+        }
+
+        private async Task BuscarEnderecoporCep(string cep)
+        {
+            try
+            {
+                cep = cep.Replace("-", "").Trim();//replace troca o - por vazio, trim remove espaços
+
+                using (HttpClient client = new HttpClient())//HttpClient para fazer requisições http
+                {
+                    string url = $"https://viacep.com.br/ws/{cep}/json/";
+                    //aleregar o cep fixo acima para o cep digitado
+
+                    var response = await client.GetAsync(url);//await espera a resposta da requisição
+                    //busca la na url e joga na variavl response
+
+                    if(response.IsSuccessStatusCode)
+                    {
+                        string json = await response.Content.ReadAsStringAsync();
+
+                        dynamic ? dadosEndereco = JsonConvert.DeserializeObject(json);
+
+                       
+                            txtEndereco.Text = dadosEndereco?.logradouro;
+                            txtBairro.Text = dadosEndereco?.bairro;
+                            txtCidade.Text = dadosEndereco?.localidade;
+                            cbxEstado.Text = dadosEndereco?.uf;
+                            
+                       
+                    }
+
+                    //string json = await response.Content.ReadAsStringAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                ExibirMensagem($"Erro ao buscar o endereço: {ex.Message}");
+            }
+        }
+
+        private async void txtCep_Leave(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(txtCep.Text))//! inverte a resposta da função IsNullOrEmpty, se o campo nao estiver nulo ou vazio 
+            {
+                //chamar o metodo para buscar o endereço
+               await BuscarEnderecoporCep(txtCep.Text);
             }
         }
     }
