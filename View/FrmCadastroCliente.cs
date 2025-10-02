@@ -343,104 +343,110 @@ namespace SistemaAtendimento
             }
         }
 
-      private async Task BuscarEnderecoPorCep(string cep)
-
-{
-
-    try
-
-    {
-
-        cep = cep.Replace("-", "").Trim();
- 
-        using (HttpClient client = new HttpClient())
+        private async Task BuscarEnderecoPorCep(string cep)
 
         {
 
-            string url = $"https://viacep.com.br/ws/{cep}/json/";
- 
-            var response = await client.GetAsync(url);
- 
-            if (response.IsSuccessStatusCode)
+            try
 
             {
 
-                string json = await response.Content.ReadAsStringAsync();
+                cep = cep.Replace("-", "").Trim();
 
-                var dadosEndereco = JsonConvert.DeserializeObject<Endereco>(json);
- 
-                if (dadosEndereco == null || dadosEndereco.Erro)
+                using (HttpClient client = new HttpClient())
 
                 {
 
-                    ExibirMensagem("CEP inválido ou não encontrado.");
+                    string url = $"https://viacep.com.br/ws/{cep}/json/";
 
-                    return;
+                    var response = await client.GetAsync(url);
+
+                    if (response.IsSuccessStatusCode)
+
+                    {
+
+                        string json = await response.Content.ReadAsStringAsync();
+
+                        var dadosEndereco = JsonConvert.DeserializeObject<Endereco>(json);
+
+                        if (dadosEndereco == null || dadosEndereco.Erro)
+
+                        {
+
+                            ExibirMensagem("CEP inválido ou não encontrado.");
+
+                            return;
+
+                        }
+
+                        txtEndereco.Text = dadosEndereco.Logradouro;
+
+                        txtBairro.Text = dadosEndereco.Bairro;
+
+                        txtCidade.Text = dadosEndereco.Localidade;
+
+                        cbxEstado.Text = dadosEndereco.Uf;
+
+                    }
+
+                    else
+
+                    {
+
+                        ExibirMensagem("Erro na comunicação com o serviço de CEP.");
+
+                    }
 
                 }
- 
-                txtEndereco.Text = dadosEndereco.Logradouro;
-
-                txtBairro.Text = dadosEndereco.Bairro;
-
-                txtCidade.Text = dadosEndereco.Localidade;
-
-                cbxEstado.Text = dadosEndereco.Uf;
 
             }
 
-            else
+            catch (Exception ex)
 
             {
 
-                ExibirMensagem("Erro na comunicação com o serviço de CEP.");
+                ExibirMensagem($"Erro ao buscar o endereço: {ex.Message}");
 
             }
 
         }
 
-    }
+        private async void txtCep_Leave(object sender, EventArgs e)
 
-    catch (Exception ex)
+        {
 
-    {
+            if (!string.IsNullOrEmpty(txtCep.Text))
 
-        ExibirMensagem($"Erro ao buscar o endereço: {ex.Message}");
+            {
 
-    }
+                await BuscarEnderecoPorCep(txtCep.Text);
 
-}
- 
-private async void txtCep_Leave(object sender, EventArgs e)
+            }
 
-{
+        }
 
-    if (!string.IsNullOrEmpty(txtCep.Text))
+        public class Endereco
 
-    { 
+        {
 
-        await BuscarEnderecoPorCep(txtCep.Text);
+            public string? Logradouro { get; set; }
 
-    }
+            public string? Bairro { get; set; }
 
-}
- 
-public class Endereco
+            public string? Localidade { get; set; }
 
-{
+            public string? Uf { get; set; }
 
-    public string? Logradouro { get; set; }
+            public bool Erro { get; set; }  // Indica se houve erro na busca
 
-    public string? Bairro { get; set; }
+        }
 
-    public string? Localidade { get; set; }
-
-    public string? Uf { get; set; }
-
-    public bool Erro { get; set; }  // Indica se houve erro na busca
-
-}
- 
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            
+           string termo = txtPesquisar.Text.Trim();//trim tira os espaços brancos, " diego rodrigues ", tira espaço do inicio e fim 
+            _clienteController.ListarClientes(termo);
+        }
     }
 
 

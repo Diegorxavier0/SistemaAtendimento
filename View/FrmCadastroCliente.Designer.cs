@@ -542,11 +542,12 @@
             btnPesquisar.ImageAlign = ContentAlignment.MiddleLeft;
             btnPesquisar.ImageIndex = 4;
             btnPesquisar.ImageList = imlIcones;
-            btnPesquisar.Location = new Point(728, 328);
+            btnPesquisar.Location = new Point(728, 320);
             btnPesquisar.Name = "btnPesquisar";
             btnPesquisar.Size = new Size(40, 32);
             btnPesquisar.TabIndex = 21;
             btnPesquisar.UseVisualStyleBackColor = true;
+            btnPesquisar.Click += btnPesquisar_Click;
             // 
             // grbListaClientes
             // 

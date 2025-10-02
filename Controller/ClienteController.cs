@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SistemaAtendimento.Model;
-using SistemaAtendimento.Repositories;
+using SistemaAtendimento.Repository;
 
 namespace SistemaAtendimento.Controller
 {
@@ -20,11 +20,11 @@ namespace SistemaAtendimento.Controller
             _clienteRepository = new ClienteRepository();
         }
 
-        public void ListarClientes()
+        public void ListarClientes(string termo = "")
         {
             try
             {
-                var listaClientes = _clienteRepository.Listar();
+                var listaClientes = _clienteRepository.Listar(termo);
                 _frmCadastroCliente.ExibirClientes(listaClientes);
             }
             catch (Exception ex)

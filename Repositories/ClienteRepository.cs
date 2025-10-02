@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using SistemaAtendimento.Database;
 using SistemaAtendimento.Model;
 
-
-namespace SistemaAtendimento.Repositories
+namespace SistemaAtendimento.Repository
 {
     public class ClienteRepository
     {
-        public List<Clientes> Listar()
+        public List<Clientes> Listar(string termo = "")
         {
             var clientes = new List<Clientes>();
 
@@ -20,8 +16,18 @@ namespace SistemaAtendimento.Repositories
             {
                 string sql = "SELECT * FROM Clientes";
 
+                if (!string.IsNullOrEmpty(termo))
+                {
+                    sql += " WHERE nome LIKE @termo OR email LIKE @termo";
+                }
+
                 using (var comando = new SqlCommand(sql, conexao))
                 {
+                    if (!string.IsNullOrEmpty(termo))
+                    {
+                        comando.Parameters.AddWithValue("@termo", $"%{termo}%");
+                    }
+
                     conexao.Open();
 
                     using (var linhas = comando.ExecuteReader())
@@ -45,19 +51,22 @@ namespace SistemaAtendimento.Repositories
                                 Cidade = linhas["cidade"].ToString(),
                                 Estado = linhas["estado"].ToString(),
                                 Ativo = Convert.ToBoolean(linhas["ativo"])
-
                             });
-
                         }
                     }
                 }
-                return clientes;
             }
-        }   public void Inserir(Clientes cliente)
+
+            return clientes;
+        }
+
+        public void Inserir(Clientes cliente)
         {
             using (var conexao = ConexaoDB.GetConexao())
             {
-                string sql = "INSERT INTO clientes (nome, email, cpf_cnpj, tipo_pessoa, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado, ativo) VALUES (@nome, @email, @cpf_cnpj, @tipo_pessoa, @telefone, @celular, @cep, @endereco, @numero, @complemento, @bairro, @cidade, @estado, @ativo)";
+                string sql = @"INSERT INTO clientes 
+                               (nome, email, cpf_cnpj, tipo_pessoa, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado, ativo) 
+                               VALUES (@nome, @email, @cpf_cnpj, @tipo_pessoa, @telefone, @celular, @cep, @endereco, @numero, @complemento, @bairro, @cidade, @estado, @ativo)";
 
                 using (var comando = new SqlCommand(sql, conexao))
                 {
@@ -75,13 +84,10 @@ namespace SistemaAtendimento.Repositories
                     comando.Parameters.AddWithValue("@cidade", cliente.Cidade);
                     comando.Parameters.AddWithValue("@estado", cliente.Estado);
                     comando.Parameters.AddWithValue("@ativo", cliente.Ativo);
+
                     conexao.Open();
                     comando.ExecuteNonQuery();
-
-                   
                 }
-
-
             }
         }
 
@@ -89,7 +95,13 @@ namespace SistemaAtendimento.Repositories
         {
             using (var conexao = ConexaoDB.GetConexao())
             {
-                string sql = "UPDATE clientes SET nome = @nome, email = @email, cpf_cnpj = @cpf_cnpj, tipo_pessoa = @tipo_pessoa, telefone = @telefone, celular = @celular, cep = @cep, endereco = @endereco, numero = @numero, complemento = @complemento, bairro = @bairro, cidade = @cidade, estado = @estado, ativo = @ativo WHERE id= @id";
+                string sql = @"UPDATE clientes 
+                               SET nome = @nome, email = @email, cpf_cnpj = @cpf_cnpj, tipo_pessoa = @tipo_pessoa, 
+                                   telefone = @telefone, celular = @celular, cep = @cep, endereco = @endereco, 
+                                   numero = @numero, complemento = @complemento, bairro = @bairro, cidade = @cidade, 
+                                   estado = @estado, ativo = @ativo 
+                               WHERE id = @id";
+
                 using (var comando = new SqlCommand(sql, conexao))
                 {
                     comando.Parameters.AddWithValue("@id", cliente.Id);
@@ -107,8 +119,9 @@ namespace SistemaAtendimento.Repositories
                     comando.Parameters.AddWithValue("@cidade", cliente.Cidade);
                     comando.Parameters.AddWithValue("@estado", cliente.Estado);
                     comando.Parameters.AddWithValue("@ativo", cliente.Ativo);
-                    conexao.Open();//abre conexão com o banco
-                    comando.ExecuteNonQuery();//executa o comando
+
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
                 }
             }
         }
@@ -118,6 +131,7 @@ namespace SistemaAtendimento.Repositories
             using (var conexao = ConexaoDB.GetConexao())
             {
                 string sql = "DELETE FROM clientes WHERE id = @id";
+
                 using (var comando = new SqlCommand(sql, conexao))
                 {
                     comando.Parameters.AddWithValue("@id", id);
