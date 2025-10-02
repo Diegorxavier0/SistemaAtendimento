@@ -70,6 +70,21 @@ namespace SistemaAtendimento.Controller
                 _frmCadastroEtapa.ExibirMensagem($"Erro ao atualizar o Cliente: {ex.Message}");
             }
         }
+        public void Excluir(int id)
+        {
+            try
+            {
+                _etapaRepository.Excluir(id);
+                _frmCadastroEtapa.ExibirMensagem($"Etapa excluída com Sucesso:");
+                //atualizar dataGrid 
+                ListarEtapas();
+                _frmCadastroEtapa.DesabilitarCampos();
+            }
+            catch (Exception ex)
+            {
+                _frmCadastroEtapa.ExibirMensagem($"Erro ao excluir a Etapa: {ex.Message}");
+            }
+        }
     }
 }
     

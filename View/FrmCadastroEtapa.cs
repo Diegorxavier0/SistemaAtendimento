@@ -48,7 +48,7 @@ namespace SistemaAtendimento.View
 
             if (string.IsNullOrWhiteSpace(txtCodigo.Text))
             {
-               
+
                 _etapaController.Salvar(etapa);
             }
             else
@@ -103,12 +103,10 @@ namespace SistemaAtendimento.View
 
         public void DesabilitarCampos()
         {
+            Limparcampos();
             txtNome.ReadOnly = true;
             txtOrdem.ReadOnly = true;
             pnlSituacao.Enabled = false;
-
-
-
 
             btnNovo.Enabled = true;
             btnSalvar.Enabled = false;
@@ -157,6 +155,25 @@ namespace SistemaAtendimento.View
         {
             HabilitarCampos();
             btnEditar.Enabled = false;
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCodigo.Text))
+            {
+                ExibirMensagem("Selecione uma etapa para excluir.");
+                return;
+            }
+
+
+            DialogResult resultado = MessageBox.Show("Tem certeza que deseja excluir esta etapa?", "Confirmação de Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                int id = Convert.ToInt32(txtCodigo.Text);
+                _etapaController.Excluir(id);
+
+            }
         }
     }
 }

@@ -154,6 +154,7 @@
             // 
             txtCodigo.Location = new Point(16, 40);
             txtCodigo.Name = "txtCodigo";
+            txtCodigo.ReadOnly = true;
             txtCodigo.Size = new Size(112, 23);
             txtCodigo.TabIndex = 0;
             // 
@@ -223,6 +224,7 @@
             btnExcluir.Text = "Excluir";
             btnExcluir.TextAlign = ContentAlignment.MiddleRight;
             btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // btnSalvar
             // 
