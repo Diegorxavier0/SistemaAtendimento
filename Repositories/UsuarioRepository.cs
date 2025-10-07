@@ -11,15 +11,26 @@ namespace SistemaAtendimento.Repositories
 {
     public class UsuarioRepository
     {
-        public List<Usuarios> Listar()
+        public List<Usuarios> Listar(string termo = "")
         {
             var usuarios = new List<Usuarios>();
 
             using (var conexao = ConexaoDB.GetConexao())
             {
                 string sql = "SELECT * FROM Usuarios";
+
+                if (!string.IsNullOrEmpty(termo))
+                {
+                    sql += " WHERE nome LIKE @termo OR email LIKE @termo";
+                }
+
                 using (var comando = new SqlCommand(sql, conexao))
                 {
+                    if (!string.IsNullOrEmpty(termo))
+                    {
+                        comando.Parameters.AddWithValue("@termo", $"%{termo}%");
+                    }
+
                     conexao.Open();
                     using (var linhas = comando.ExecuteReader())
                     {

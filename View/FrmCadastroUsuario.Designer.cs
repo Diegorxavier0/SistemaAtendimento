@@ -263,6 +263,7 @@
             btnPesquisar.Size = new Size(56, 32);
             btnPesquisar.TabIndex = 6;
             btnPesquisar.UseVisualStyleBackColor = true;
+            btnPesquisar.Click += btnPesquisar_Click;
             // 
             // txtPesquisar
             // 

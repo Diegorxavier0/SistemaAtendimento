@@ -20,11 +20,11 @@ namespace SistemaAtendimento.Controller
             _usuarioRepository = new UsuarioRepository();
         }
 
-        public void ListarUsuarios()
+        public void ListarUsuarios(string termo = "")
         {
             try
             {
-                var listaUsuarios = _usuarioRepository.Listar();
+                var listaUsuarios = _usuarioRepository.Listar(termo);
                 _frmCadastroUsuario.ExibirUsuarios(listaUsuarios);
             }
             catch (Exception ex)
