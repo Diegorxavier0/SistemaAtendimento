@@ -305,6 +305,7 @@
             btnPesquisar.Size = new Size(51, 40);
             btnPesquisar.TabIndex = 11;
             btnPesquisar.UseVisualStyleBackColor = true;
+            btnPesquisar.Click += btnPesquisar_Click;
             // 
             // FrmCadastroEtapa
             // 

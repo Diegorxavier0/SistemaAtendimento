@@ -12,7 +12,7 @@ namespace SistemaAtendimento.Repositories
     public class EtapaRepository
     {
         // Método para listar todas as etapas
-        public List<Etapas> Listar()
+        public List<Etapas> Listar(string termo = "")
         {
             var etapas = new List<Etapas>();
 
@@ -20,8 +20,18 @@ namespace SistemaAtendimento.Repositories
             {
                 string sql = "SELECT * FROM Etapas";
 
+                if (!string.IsNullOrEmpty(termo))
+                {
+                    sql += " WHERE nome LIKE @termo OR ordem LIKE @termo";
+                }
+
                 using (var comando = new SqlCommand(sql, conexao))
                 {
+                    if (!string.IsNullOrEmpty(termo))
+                    {
+                        comando.Parameters.AddWithValue("@termo", $"%{termo}%");
+                    }
+
                     conexao.Open();
 
                     using (var linhas = comando.ExecuteReader())
