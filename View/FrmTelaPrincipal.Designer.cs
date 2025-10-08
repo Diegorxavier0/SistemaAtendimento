@@ -106,6 +106,7 @@
             consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
             consultasToolStripMenuItem.Size = new Size(180, 22);
             consultasToolStripMenuItem.Text = "Consultas";
+            consultasToolStripMenuItem.Click += consultasToolStripMenuItem_Click;
             // 
             // sistemaToolStripMenuItem
             // 

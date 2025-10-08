@@ -391,6 +391,7 @@
             btnPesquisarAtendimento.Text = "Pesquisar Atendimento";
             btnPesquisarAtendimento.TextAlign = ContentAlignment.MiddleRight;
             btnPesquisarAtendimento.UseVisualStyleBackColor = true;
+            btnPesquisarAtendimento.Click += btnPesquisarAtendimento_Click;
             // 
             // FrmAtendimento
             // 
