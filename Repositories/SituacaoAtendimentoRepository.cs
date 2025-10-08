@@ -8,16 +8,25 @@ namespace SistemaAtendimento.Repositories
 {
     public class SituacaoAtendimentoRepository
     {
-        public List<SituacaoAtendimentos> Listar()
+        public List<SituacaoAtendimentos> Listar(string termo = "")
         {
             var situacaoAtendimentos = new List<SituacaoAtendimentos>();
 
             using (var conexao = ConexaoDB.GetConexao())
             {
                 string sql = "SELECT * FROM situacao_atendimentos";
+                if (!string.IsNullOrEmpty(termo))
+                {
+                    sql += " WHERE nome LIKE @termo OR cor LIKE @termo";
+                }
 
                 using (var comando = new SqlCommand(sql, conexao))
                 {
+                    if (!string.IsNullOrEmpty(termo))
+                    {
+                        comando.Parameters.AddWithValue("@termo", $"%{termo}%");
+                    }
+
                     conexao.Open();
 
                     using (var linhas = comando.ExecuteReader())

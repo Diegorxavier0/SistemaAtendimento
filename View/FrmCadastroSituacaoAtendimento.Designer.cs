@@ -262,7 +262,6 @@
             // 
             txtPesquisar.Location = new Point(472, 184);
             txtPesquisar.Name = "txtPesquisar";
-            txtPesquisar.ReadOnly = true;
             txtPesquisar.Size = new Size(208, 23);
             txtPesquisar.TabIndex = 10;
             // 
@@ -275,6 +274,7 @@
             btnPesquisar.Size = new Size(80, 40);
             btnPesquisar.TabIndex = 11;
             btnPesquisar.UseVisualStyleBackColor = true;
+            btnPesquisar.Click += btnPesquisar_Click;
             // 
             // lblPesquisar
             // 
