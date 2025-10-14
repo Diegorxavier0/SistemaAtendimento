@@ -315,7 +315,6 @@
             // 
             // btnAdicionarEtapa
             // 
-            btnAdicionarEtapa.Enabled = false;
             btnAdicionarEtapa.Font = new Font("Segoe UI", 11F);
             btnAdicionarEtapa.ImageAlign = ContentAlignment.MiddleLeft;
             btnAdicionarEtapa.ImageIndex = 3;
@@ -338,7 +337,6 @@
             // 
             // btnExcluirEtapa
             // 
-            btnExcluirEtapa.Enabled = false;
             btnExcluirEtapa.Font = new Font("Segoe UI", 11F);
             btnExcluirEtapa.ImageAlign = ContentAlignment.MiddleLeft;
             btnExcluirEtapa.ImageIndex = 0;
