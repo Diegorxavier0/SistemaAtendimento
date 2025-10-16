@@ -16,6 +16,9 @@ namespace SistemaAtendimento.Model
         public DateTime? DataFechamento { get; set; }
         public int SituacaoAtendimentoId { get; set; }
      
-       
+        public string? ClienteNome { get; set; }
+        public string? UsuarioNome { get; set; }
+        public string? SituacaoAtendimentoNome { get; set; }
+
     }
 }
