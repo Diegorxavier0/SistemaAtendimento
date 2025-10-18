@@ -67,6 +67,7 @@
             btnPesquisar.TabIndex = 3;
             btnPesquisar.Text = "Pesquisar";
             btnPesquisar.UseVisualStyleBackColor = true;
+            btnPesquisar.Click += btnPesquisar_Click;
             // 
             // imlIcones
             // 
@@ -105,6 +106,7 @@
             Controls.Add(grbFiltro);
             Name = "FrmConsultaAtendimento";
             Text = "Consultas de Atendimentos";
+            Load += FrmConsultaAtendimento_Load;
             ((System.ComponentModel.ISupportInitialize)dgvConsultaAtendimento).EndInit();
             grbFiltro.ResumeLayout(false);
             grbFiltro.PerformLayout();

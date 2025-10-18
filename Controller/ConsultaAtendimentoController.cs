@@ -25,12 +25,12 @@ namespace SistemaAtendimento.Controller
                 var listaAtendimentos = _atendimentoRepository.Listar(termo, condicao);
 
                 // Envia a lista para a View exibir
-                //_frmConsultaAtendimento.ExibirAtendimentos(listaAtendimentos);
+                _frmConsultaAtendimento.ExibirAtendimentos(listaAtendimentos);
             }
             catch (Exception ex)
             {
                 // Mostra mensagem de erro na View
-                //_frmConsultaAtendimento.ExibirMensagem($"Erro ao carregar os atendimentos: {ex.Message}");
+                _frmConsultaAtendimento.ExibirMensagem($"Erro ao carregar os atendimentos: {ex.Message}");
             }
         }
     }
