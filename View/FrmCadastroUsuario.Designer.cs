@@ -277,7 +277,7 @@
             grbListaUsuarios.Controls.Add(dgvListaUsuarios);
             grbListaUsuarios.Location = new Point(8, 256);
             grbListaUsuarios.Name = "grbListaUsuarios";
-            grbListaUsuarios.Size = new Size(728, 172);
+            grbListaUsuarios.Size = new Size(784, 172);
             grbListaUsuarios.TabIndex = 7;
             grbListaUsuarios.TabStop = false;
             grbListaUsuarios.Text = "Lista de Usuários";
@@ -285,9 +285,9 @@
             // dgvListaUsuarios
             // 
             dgvListaUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvListaUsuarios.Location = new Point(0, 16);
+            dgvListaUsuarios.Location = new Point(-192, 16);
             dgvListaUsuarios.Name = "dgvListaUsuarios";
-            dgvListaUsuarios.Size = new Size(888, 150);
+            dgvListaUsuarios.Size = new Size(984, 160);
             dgvListaUsuarios.TabIndex = 0;
             dgvListaUsuarios.CellDoubleClick += dgvListaUsuarios_CellDoubleClick;
             // 

@@ -1,4 +1,5 @@
-﻿using SistemaAtendimento.Controller;
+﻿using System.Windows.Forms;
+using SistemaAtendimento.Controller;
 using SistemaAtendimento.Model;
 
 namespace SistemaAtendimento.View
@@ -16,6 +17,10 @@ namespace SistemaAtendimento.View
         private void FrmCadastroSituacaoAtendimento_Load(object sender, EventArgs e)
         {
             _situacaoAtendimentoController.ListarSituacaoAtendimentos();
+
+            dgvListaSituacaoAtendimento.Dock = DockStyle.Fill;
+            dgvListaSituacaoAtendimento.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //dgvListaSituacaoAtendimento.ScrollBars = ScrollBars.Both;
         }
 
         public void ExibirMensagem(string mensagem)

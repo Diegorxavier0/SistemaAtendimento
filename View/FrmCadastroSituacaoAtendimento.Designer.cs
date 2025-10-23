@@ -298,9 +298,10 @@
             // dgvListaSituacaoAtendimento
             // 
             dgvListaSituacaoAtendimento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvListaSituacaoAtendimento.Location = new Point(-8, 16);
+            dgvListaSituacaoAtendimento.Dock = DockStyle.Fill;
+            dgvListaSituacaoAtendimento.Location = new Point(3, 19);
             dgvListaSituacaoAtendimento.Name = "dgvListaSituacaoAtendimento";
-            dgvListaSituacaoAtendimento.Size = new Size(840, 184);
+            dgvListaSituacaoAtendimento.Size = new Size(778, 170);
             dgvListaSituacaoAtendimento.TabIndex = 0;
             dgvListaSituacaoAtendimento.CellDoubleClick += dgvListaSituacaoAtendimento_CellDoubleClick;
             // 

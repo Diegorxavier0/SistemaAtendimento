@@ -28,6 +28,12 @@ namespace SistemaAtendimento
         private void FrmCadastroCliente_Load(object sender, EventArgs e)
         {
             _clienteController.ListarClientes();
+
+            //dgvClientes.Dock = DockStyle.Fill;
+            //dgvClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //dgvListaSituacaoAtendimento.ScrollBars = ScrollBars.Both;
+            dgvClientes.BackgroundColor = Color.White; // tira o cinza
+            //pnlTipoPessoa.Dock = DockStyle.Fill;
         }
 
 

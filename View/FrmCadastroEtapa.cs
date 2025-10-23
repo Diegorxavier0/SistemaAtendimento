@@ -24,6 +24,11 @@ namespace SistemaAtendimento.View
         private void FrmCadastroEtapa_Load(object sender, EventArgs e)
         {
             _etapaController.ListarEtapas();
+
+            dgvListaEtapas.Dock = DockStyle.Fill;
+            dgvListaEtapas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //dgvListaSituacaoAtendimento.ScrollBars = ScrollBars.Both;
+            dgvListaEtapas.BackgroundColor = Color.White; // tira o cinza
         }
         public void ExibirMensagem(string mensagem)
         {

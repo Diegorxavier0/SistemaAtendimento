@@ -24,6 +24,11 @@ namespace SistemaAtendimento.View
         private void FrmCadastroUsuario_Load(object sender, EventArgs e)//evento criado ao, NÃO PODE SER DIGITADO
         {
             _usuarioController.ListarUsuarios();
+
+            dgvListaUsuarios.Dock = DockStyle.Fill;
+            dgvListaUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //dgvListaSituacaoAtendimento.ScrollBars = ScrollBars.Both;
+            dgvListaUsuarios.BackgroundColor = Color.White; // tira o cinza
         }
 
         public void ExibirMensagem(string mensagem)
