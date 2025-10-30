@@ -164,7 +164,8 @@ namespace SistemaAtendimento.View
             if (resultado == DialogResult.Yes)
             {
                 int id = Convert.ToInt32(txtCodigo.Text);
-                _situacaoAtendimentoController.Excluir(id);//arrumar no controller
+                _situacaoAtendimentoController.Excluir(id);
+
 
             }
         }
