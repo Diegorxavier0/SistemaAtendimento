@@ -179,6 +179,7 @@
             cbxNomeCliente.Name = "cbxNomeCliente";
             cbxNomeCliente.Size = new Size(344, 23);
             cbxNomeCliente.TabIndex = 17;
+            cbxNomeCliente.SelectedIndexChanged += cbxNomeCliente_SelectedIndexChanged;
             // 
             // lblDataAbertura
             // 
@@ -403,6 +404,7 @@
             Controls.Add(grbDadosCliente);
             Name = "FrmAtendimento";
             Text = "Atendimento";
+            Load += FrmAtendimento_Load;
             grbDadosCliente.ResumeLayout(false);
             grbDadosCliente.PerformLayout();
             grbEtapasAtendimento.ResumeLayout(false);
