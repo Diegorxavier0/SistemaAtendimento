@@ -33,7 +33,6 @@
             grbDadosCliente = new GroupBox();
             btnCancelar = new Button();
             imlIcones = new ImageList(components);
-            btnEditar = new Button();
             btnSalvar = new Button();
             btnExluir = new Button();
             btnFinalizarAtendimento = new Button();
@@ -67,7 +66,6 @@
             // grbDadosCliente
             // 
             grbDadosCliente.Controls.Add(btnCancelar);
-            grbDadosCliente.Controls.Add(btnEditar);
             grbDadosCliente.Controls.Add(btnSalvar);
             grbDadosCliente.Controls.Add(btnExluir);
             grbDadosCliente.Controls.Add(btnFinalizarAtendimento);
@@ -91,17 +89,19 @@
             // 
             // btnCancelar
             // 
+            btnCancelar.Enabled = false;
             btnCancelar.Font = new Font("Segoe UI", 11F);
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
             btnCancelar.ImageIndex = 0;
             btnCancelar.ImageList = imlIcones;
-            btnCancelar.Location = new Point(400, 184);
+            btnCancelar.Location = new Point(288, 184);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(104, 32);
             btnCancelar.TabIndex = 24;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleRight;
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // imlIcones
             // 
@@ -116,41 +116,30 @@
             imlIcones.Images.SetKeyName(5, "icone-pesquisar.png");
             imlIcones.Images.SetKeyName(6, "Finalizar.png");
             // 
-            // btnEditar
-            // 
-            btnEditar.Font = new Font("Segoe UI", 11F);
-            btnEditar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEditar.ImageIndex = 1;
-            btnEditar.ImageList = imlIcones;
-            btnEditar.Location = new Point(112, 184);
-            btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(80, 32);
-            btnEditar.TabIndex = 23;
-            btnEditar.Text = "Editar";
-            btnEditar.TextAlign = ContentAlignment.MiddleRight;
-            btnEditar.UseVisualStyleBackColor = true;
-            // 
             // btnSalvar
             // 
+            btnSalvar.Enabled = false;
             btnSalvar.Font = new Font("Segoe UI", 11F);
             btnSalvar.ImageAlign = ContentAlignment.MiddleLeft;
             btnSalvar.ImageIndex = 4;
             btnSalvar.ImageList = imlIcones;
-            btnSalvar.Location = new Point(208, 184);
+            btnSalvar.Location = new Point(104, 184);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(80, 32);
             btnSalvar.TabIndex = 22;
             btnSalvar.Text = "Salvar";
             btnSalvar.TextAlign = ContentAlignment.MiddleRight;
             btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
             // 
             // btnExluir
             // 
+            btnExluir.Enabled = false;
             btnExluir.Font = new Font("Segoe UI", 11F);
             btnExluir.ImageAlign = ContentAlignment.MiddleLeft;
             btnExluir.ImageIndex = 2;
             btnExluir.ImageList = imlIcones;
-            btnExluir.Location = new Point(304, 184);
+            btnExluir.Location = new Point(192, 184);
             btnExluir.Name = "btnExluir";
             btnExluir.Size = new Size(88, 32);
             btnExluir.TabIndex = 21;
@@ -160,6 +149,7 @@
             // 
             // btnFinalizarAtendimento
             // 
+            btnFinalizarAtendimento.Enabled = false;
             btnFinalizarAtendimento.Font = new Font("Segoe UI", 11F);
             btnFinalizarAtendimento.ImageAlign = ContentAlignment.MiddleLeft;
             btnFinalizarAtendimento.ImageIndex = 6;
@@ -174,6 +164,7 @@
             // 
             // cbxNomeCliente
             // 
+            cbxNomeCliente.Enabled = false;
             cbxNomeCliente.FormattingEnabled = true;
             cbxNomeCliente.Location = new Point(144, 40);
             cbxNomeCliente.Name = "cbxNomeCliente";
@@ -192,6 +183,7 @@
             // 
             // dtpAberturaAtendimento
             // 
+            dtpAberturaAtendimento.Enabled = false;
             dtpAberturaAtendimento.Location = new Point(496, 40);
             dtpAberturaAtendimento.Name = "dtpAberturaAtendimento";
             dtpAberturaAtendimento.Size = new Size(264, 23);
@@ -210,9 +202,11 @@
             btnNovo.Text = "Novo";
             btnNovo.TextAlign = ContentAlignment.MiddleRight;
             btnNovo.UseVisualStyleBackColor = true;
+            btnNovo.Click += btnNovo_Click;
             // 
             // cbxSituacaoAtendimento
             // 
+            cbxSituacaoAtendimento.Enabled = false;
             cbxSituacaoAtendimento.FormattingEnabled = true;
             cbxSituacaoAtendimento.Location = new Point(16, 96);
             cbxSituacaoAtendimento.Name = "cbxSituacaoAtendimento";
@@ -221,6 +215,7 @@
             // 
             // txtObservacaoAtendimento
             // 
+            txtObservacaoAtendimento.Enabled = false;
             txtObservacaoAtendimento.Location = new Point(320, 88);
             txtObservacaoAtendimento.Multiline = true;
             txtObservacaoAtendimento.Name = "txtObservacaoAtendimento";
@@ -299,6 +294,7 @@
             grbEtapasAtendimento.Controls.Add(txtEtapaObservacao);
             grbEtapasAtendimento.Controls.Add(lblObservacoesAtendimento);
             grbEtapasAtendimento.Controls.Add(lblEtapaAtendimento);
+            grbEtapasAtendimento.Enabled = false;
             grbEtapasAtendimento.Location = new Point(8, 320);
             grbEtapasAtendimento.Name = "grbEtapasAtendimento";
             grbEtapasAtendimento.Size = new Size(776, 264);
@@ -442,7 +438,6 @@
         private Button btnPesquisarAtendimento;
         private Button btnFinalizarAtendimento;
         private Button btnCancelar;
-        private Button btnEditar;
         private Button btnSalvar;
         private Button btnExluir;
     }

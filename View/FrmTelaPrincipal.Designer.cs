@@ -98,7 +98,7 @@
             // 
             novoAtendimentoToolStripMenuItem.Name = "novoAtendimentoToolStripMenuItem";
             novoAtendimentoToolStripMenuItem.Size = new Size(180, 22);
-            novoAtendimentoToolStripMenuItem.Text = "Novo Atendimento";
+            novoAtendimentoToolStripMenuItem.Text = "Atendimento";
             novoAtendimentoToolStripMenuItem.Click += novoAtendimentoToolStripMenuItem_Click;
             // 
             // consultasToolStripMenuItem
