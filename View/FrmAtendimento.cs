@@ -82,6 +82,7 @@ namespace SistemaAtendimento.View
             cbxSituacaoAtendimento.DataSource = situacaoAtendimento;
             cbxSituacaoAtendimento.DisplayMember = "Nome";
             cbxSituacaoAtendimento.SelectedIndex = -1;
+            cbxSituacaoAtendimento.ValueMember = "Id";
         }
 
         //        private void HabilitarCampos();
@@ -147,25 +148,55 @@ namespace SistemaAtendimento.View
         {
             Atendimentos atendimento = new Atendimentos
             {
-                ClienteId = Convert.ToInt32(cbxNomeCliente.SelectedValue),
+
+
+                ClienteId = string.IsNullOrWhiteSpace(txtCodigoCliente.Text) ? null: Convert.ToInt32(cbxNomeCliente.SelectedValue),
+                // ? if ternário tenta depois convert,
                 UsuarioId = 1, // Substitua pelo ID do usuário logado
-                SituacaoAtendimentoId = Convert.ToInt32(cbxSituacaoAtendimento.SelectedValue),
+                SituacaoAtendimentoId = cbxSituacaoAtendimento.SelectedValue == null ? null : Convert.ToInt32(cbxSituacaoAtendimento.SelectedValue),
                 Observacao = txtObservacaoAtendimento.Text,
                 DataAbertura = dtpAberturaAtendimento.Value,
             };
 
             if (!Validardados(atendimento))
                 return;
+
+            _atendimentoController.Salvar(atendimento);
         }
             
         private bool Validardados(Atendimentos atendimento)
         {
             //criar regras de validação de campos 
+            if(string.IsNullOrWhiteSpace(txtCodigoCliente.Text))
+            {
+                cbxNomeCliente.Focus();// coloca o foco no campo
+                ExibirMensagem("Selecione um Cliente");
+                return false;
+            }
+
+            if(cbxSituacaoAtendimento.SelectedValue == null)
+            {
+                cbxSituacaoAtendimento.Focus();
+                ExibirMensagem("Selecione uma Situação do Atendimento");
+                return false;
+            }
+
+            if(string.IsNullOrWhiteSpace(txtObservacaoAtendimento.Text))
+            {
+                
+                ExibirMensagem("Informe uma Observação do Atendimento");
+                txtObservacaoAtendimento.Focus();
+                return false;
+            }
 
             return true;
 
         }
 
+        public void ExibirMensagem(string mensagem)
+        {
+            MessageBox.Show(mensagem);
+        }
 
     }
 }

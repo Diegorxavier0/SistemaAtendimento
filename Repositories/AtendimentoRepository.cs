@@ -91,16 +91,16 @@ namespace SistemaAtendimento.Repositories
             using (var conexao = ConexaoDB.GetConexao())
             {
                 string sql = @"INSERT INTO atendimentos 
-                              (cliente_id, usuario_id, observacao, data_abertura, data_fechamento, situacao_atendimento_id)
+                              (cliente_id, usuario_id, observacao, data_abertura, situacao_atendimento_id)
                               VALUES 
-                              (@cliente_id, @usuario_id, @observacao, @data_abertura, @data_fechamento, @situacao_atendimento_id)";
+                              (@cliente_id, @usuario_id, @observacao, @data_abertura, @situacao_atendimento_id)";
                 using (var comando = new SqlCommand(sql, conexao))
                 {
                     comando.Parameters.AddWithValue("@cliente_id", atendimentos.ClienteId);
                     comando.Parameters.AddWithValue("@usuario_id", atendimentos.UsuarioId);
                     comando.Parameters.AddWithValue("@observacao", atendimentos.Observacao);
                     comando.Parameters.AddWithValue("@data_abertura", atendimentos.DataAbertura);
-                    comando.Parameters.AddWithValue("@data_fechamento", atendimentos.DataFechamento);
+                   
                     comando.Parameters.AddWithValue("@situacao_atendimento_id", atendimentos.SituacaoAtendimentoId);
                     conexao.Open();
                     comando.ExecuteNonQuery();
