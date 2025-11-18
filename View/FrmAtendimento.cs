@@ -22,10 +22,13 @@ namespace SistemaAtendimento.View
     {
         private AtendimentoController _atendimentoController;
 
-        public FrmAtendimento()
+        private int? _atendimentoId = null; // Armazena o ID do atendimento atual (nulo se for novo)
+
+        public FrmAtendimento(int? atendimentoId = null)
         {
             InitializeComponent();
             _atendimentoController = new AtendimentoController(this); //this injeta esse formulario no controlador
+            _atendimentoId = atendimentoId;
         }
 
         private void btnPesquisarAtendimento_Click(object sender, EventArgs e)
@@ -55,6 +58,39 @@ namespace SistemaAtendimento.View
             carregarClientes();
             CarregarEtapas();
             CarregarSituacaoAtendimento();
+
+            if (_atendimentoId.HasValue)
+            {
+
+                var atendimento = _atendimentoController.BuscarAtendimentoPorId(_atendimentoId.Value);
+
+                if (atendimento != null)
+                {
+                    //preencher os campos com as informações do atendimento
+                    PreencherCampos(atendimento);
+                    //HabilitarCampos();
+                }
+            }
+        }
+
+        private void PreencherCampos(Atendimentos atendimento)
+        {
+            txtCodigoAtendimento.Text = atendimento.Id.ToString();
+            txtCodigoCliente.Text = atendimento.ClienteId?.ToString() ?? "";
+            cbxNomeCliente.SelectedValue = atendimento.ClienteId;
+            cbxSituacaoAtendimento.SelectedValue = atendimento.SituacaoAtendimentoId;
+            dtpAberturaAtendimento.Value = atendimento.DataAbertura ?? DateTime.Now;
+            txtObservacaoAtendimento.Text = atendimento.Observacao;
+
+           
+            txtObservacaoAtendimento.Enabled = true;
+            txtObservacaoAtendimento.ReadOnly = false;
+            cbxSituacaoAtendimento.Enabled = true;
+            btnNovo.Enabled = false;
+            btnSalvar.Enabled = true;
+            btnExluir.Enabled = true;
+            btnCancelar.Enabled = true;
+            btnFinalizarAtendimento.Enabled = true;
         }
 
 
@@ -122,6 +158,9 @@ namespace SistemaAtendimento.View
             btnSalvar.Enabled = false;
             btnNovo.Enabled = true;
             btnCancelar.Enabled = false;
+            txtCodigoAtendimento.Enabled = true;
+            btnExluir.Enabled = false;
+
         }
 
         private void LimparCampos()
@@ -131,6 +170,7 @@ namespace SistemaAtendimento.View
             cbxEtapaAtendimento.SelectedIndex = -1;
             cbxSituacaoAtendimento.SelectedIndex = -1;
             dtpAberturaAtendimento.Value = DateTime.Now;
+            txtCodigoAtendimento.Clear();
             txtCodigoCliente.Clear();
         }
 
@@ -191,6 +231,7 @@ namespace SistemaAtendimento.View
 
             return true;
 
+            
         }
 
         public void ExibirMensagem(string mensagem)

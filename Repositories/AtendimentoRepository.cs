@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
+using Microsoft.Identity.Client;
 using SistemaAtendimento.Database;
 using SistemaAtendimento.Model;
 
@@ -70,7 +71,7 @@ namespace SistemaAtendimento.Repositories
                                 ClienteId = Convert.ToInt32(linhas["cliente_id"]),
                                 UsuarioId = Convert.ToInt32(linhas["usuario_id"]),
                                 Observacao = linhas["observacao"].ToString(),
-                                DataAbertura = linhas["data_abertura"]as DateTime?,
+                                DataAbertura = linhas["data_abertura"] as DateTime?,
                                 DataFechamento = linhas["data_fechamento"] as DateTime?,
                                 SituacaoAtendimentoId = Convert.ToInt32(linhas["situacao_atendimento_id"]),
                                 ClienteNome = linhas["cliente_nome"].ToString(),
@@ -85,7 +86,14 @@ namespace SistemaAtendimento.Repositories
                 return lista;
             }
         }
+             public Atendimentos? BuscarPorId(int id)
+             {
+            var resultado = Listar(id.ToString(), "Código do Atendimento");
+            return resultado.FirstOrDefault();
+             }
+        
 
+        
         public void Inserir(Atendimentos atendimentos)
         {
             using (var conexao = ConexaoDB.GetConexao())

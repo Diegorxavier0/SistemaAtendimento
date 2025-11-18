@@ -15,6 +15,7 @@ namespace SistemaAtendimento.View
     public partial class FrmConsultaAtendimento : Form
     {
         private ConsultaAtendimentoController _consultaAtendimentoController;
+
         public FrmConsultaAtendimento()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace SistemaAtendimento.View
         {
             _consultaAtendimentoController.ListarAtendimentos();
         }
+
         public void ExibirMensagem(string mensagem)
         {
             MessageBox.Show(mensagem);
@@ -32,9 +34,6 @@ namespace SistemaAtendimento.View
 
         public void ExibirAtendimentos(List<Atendimentos> atendimentos)
         {
-            // Lógica para exibir a lista de atendimentos na interface do usuário
-            // Por exemplo, preencher um DataGridView ou ListBox com os dados
-
             dgvConsultaAtendimento.DataSource = atendimentos;
         }
 
@@ -59,6 +58,22 @@ namespace SistemaAtendimento.View
             }
 
             _consultaAtendimentoController.ListarAtendimentos(termo, condicaoRepo);
+        }
+
+        private void dgvConsultaAtendimento_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int id = (int)dgvConsultaAtendimento.Rows[e.RowIndex].Cells["Id"].Value;
+
+                // FECHA a tela atual antes de abrir a próxima
+                this.Hide();  // esconde para não aparecer piscando
+
+                FrmAtendimento frmAtendimento = new FrmAtendimento(id);
+                frmAtendimento.ShowDialog(); // abre o atendimento
+
+               this.Close(); // fecha de vez a tela de consulta
+            }
         }
     }
 }
