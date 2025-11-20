@@ -86,13 +86,57 @@ namespace SistemaAtendimento.Repositories
                 return lista;
             }
         }
-             public Atendimentos? BuscarPorId(int id)
-             {
-            var resultado = Listar(id.ToString(), "Código do Atendimento");
-            return resultado.FirstOrDefault();
-             }
+            // public Atendimentos? BuscarPorId(int id)
+            // {
+            //var resultado = Listar(id.ToString(), "Código do Atendimento");
+            //return resultado.FirstOrDefault();
+            // }
         
+        public Atendimentos? BuscarPorId(int id)//função pra buscar um unico registro 
+        {
+            using (var conexao = ConexaoDB.GetConexao())
+            {
+                string sql = @"SELECT 
+                                a.*, 
+                                c.nome AS cliente_nome,
+                                u.nome AS usuario_nome,
+                                s.nome AS situacao_nome 
+                                FROM atendimentos a 
+                                INNER JOIN clientes c ON c.id = a.cliente_id 
+                                INNER JOIN usuarios u ON u.id = a.usuario_id
+                                INNER JOIN situacao_atendimentos s ON s.id = a.situacao_atendimento_id 
+                                WHERE a.id = @id";
 
+                using (var comando = new SqlCommand(sql, conexao))
+                {
+                    comando.Parameters.AddWithValue(@"id", id);
+                    conexao.Open();
+
+                    using (var linha = comando.ExecuteReader())
+                    {
+                        if (linha.Read())
+                        {
+                            return new Atendimentos
+                            {
+                                Id = Convert.ToInt32(linha["id"]),
+                                ClienteId = Convert.ToInt32(linha["cliente_id"]),
+                                UsuarioId = Convert.ToInt32(linha["usuario_id"]),
+                                Observacao = linha["observacao"].ToString(),
+                                DataAbertura = linha["data_abertura"] as DateTime?,//Cast para DateTime?
+                                DataFechamento = linha["data_fechamento"] as DateTime?,
+                                SituacaoAtendimentoId = Convert.ToInt32(linha["situacao_atendimento_id"]),
+                                ClienteNome = linha["cliente_nome"].ToString(),
+                                UsuarioNome = linha["usuario_nome"].ToString(),
+                                SituacaoAtendimentoNome = linha["situacao_nome"].ToString()
+                            };
+
+
+                        }
+                    }
+                }
+            }
+            return null;
+     }   
         
         public void Inserir(Atendimentos atendimentos)
         {
@@ -121,22 +165,26 @@ namespace SistemaAtendimento.Repositories
             using (var conexao = ConexaoDB.GetConexao())
             {
                 string sql = @"UPDATE atendimentos SET 
-                               cliente_id = @cliente_id, 
-                               usuario_id = @usuario_id, 
-                               observacao = @observacao, 
-                               data_abertura = @data_abertura, 
-                               data_fechamento = @data_fechamento, 
-                               situacao_atendimento_id = @situacao_atendimento_id
-                               WHERE id = @id";
+                       cliente_id = @cliente_id, 
+                       usuario_id = @usuario_id, 
+                       observacao = @observacao, 
+                       data_abertura = @data_abertura, 
+                       situacao_atendimento_id = @situacao_atendimento_id
+                       WHERE id = @id";
+
                 using (var comando = new SqlCommand(sql, conexao))
                 {
                     comando.Parameters.AddWithValue("@cliente_id", atendimentos.ClienteId);
                     comando.Parameters.AddWithValue("@usuario_id", atendimentos.UsuarioId);
                     comando.Parameters.AddWithValue("@observacao", atendimentos.Observacao);
                     comando.Parameters.AddWithValue("@data_abertura", atendimentos.DataAbertura);
-                    comando.Parameters.AddWithValue("@data_fechamento", atendimentos.DataFechamento);
+
+                    //comando.Parameters.AddWithValue("@data_fechamento",
+                    //    (object?)atendimentos.DataFechamento ?? DBNull.Value);
+
                     comando.Parameters.AddWithValue("@situacao_atendimento_id", atendimentos.SituacaoAtendimentoId);
                     comando.Parameters.AddWithValue("@id", atendimentos.Id);
+
                     conexao.Open();
                     comando.ExecuteNonQuery();
                 }

@@ -59,10 +59,27 @@ namespace SistemaAtendimento.Controller
 
 
         }
+        public void Atualizar(Atendimentos atendimento)
+        {
+            try
+            {
+                
+                _atendimentoRepository.Atualizar(atendimento);
+                _frmAtendimento.ExibirMensagem("Atendimento atualizado com sucesso!");
+                //_frmAtendimento. desabilitarrrrrr
+            }
+            catch (Exception ex)
+            {
+                _frmAtendimento.ExibirMensagem("Erro ao atualizar atendimento: " + ex.Message);
+            }
+        }
+
         public Atendimentos? BuscarAtendimentoPorId(int id)
         {
             return _atendimentoRepository.BuscarPorId(id);
         }
+
+        
     }
 }
 

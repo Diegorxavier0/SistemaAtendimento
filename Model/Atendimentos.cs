@@ -8,7 +8,7 @@ namespace SistemaAtendimento.Model
 {
     public class Atendimentos
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int? ClienteId { get; set; }//? permite nulo
         public int? UsuarioId { get; set; }
         public string? Observacao { get; set; }

@@ -34,7 +34,7 @@ namespace SistemaAtendimento.View
         private void btnPesquisarAtendimento_Click(object sender, EventArgs e)
         {
             FrmConsultaAtendimento frmConsultaAtendimento = new FrmConsultaAtendimento();
-            frmConsultaAtendimento.ShowDialog();
+            frmConsultaAtendimento.Show();
 
         }
 
@@ -188,8 +188,7 @@ namespace SistemaAtendimento.View
         {
             Atendimentos atendimento = new Atendimentos
             {
-
-
+                Id = _atendimentoId ?? null,
                 ClienteId = string.IsNullOrWhiteSpace(txtCodigoCliente.Text) ? null: Convert.ToInt32(cbxNomeCliente.SelectedValue),
                 // ? if ternário tenta depois convert,
                 UsuarioId = 1, // Substitua pelo ID do usuário logado
@@ -201,7 +200,15 @@ namespace SistemaAtendimento.View
             if (!Validardados(atendimento))
                 return;
 
-            _atendimentoController.Salvar(atendimento);
+            if(_atendimentoId.HasValue && _atendimentoId >0)
+            {
+                _atendimentoController.Atualizar(atendimento);
+            }
+            else
+            {
+                _atendimentoController.Salvar(atendimento);
+            }
+               
         }
             
         private bool Validardados(Atendimentos atendimento)
