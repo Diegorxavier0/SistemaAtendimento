@@ -82,7 +82,7 @@ namespace SistemaAtendimento.View
             dtpAberturaAtendimento.Value = atendimento.DataAbertura ?? DateTime.Now;
             txtObservacaoAtendimento.Text = atendimento.Observacao;
 
-           
+
             txtObservacaoAtendimento.Enabled = true;
             txtObservacaoAtendimento.ReadOnly = false;
             cbxSituacaoAtendimento.Enabled = true;
@@ -189,7 +189,7 @@ namespace SistemaAtendimento.View
             Atendimentos atendimento = new Atendimentos
             {
                 Id = _atendimentoId ?? null,
-                ClienteId = string.IsNullOrWhiteSpace(txtCodigoCliente.Text) ? null: Convert.ToInt32(cbxNomeCliente.SelectedValue),
+                ClienteId = string.IsNullOrWhiteSpace(txtCodigoCliente.Text) ? null : Convert.ToInt32(cbxNomeCliente.SelectedValue),
                 // ? if ternário tenta depois convert,
                 UsuarioId = 1, // Substitua pelo ID do usuário logado
                 SituacaoAtendimentoId = cbxSituacaoAtendimento.SelectedValue == null ? null : Convert.ToInt32(cbxSituacaoAtendimento.SelectedValue),
@@ -200,37 +200,41 @@ namespace SistemaAtendimento.View
             if (!Validardados(atendimento))
                 return;
 
-            if(_atendimentoId.HasValue && _atendimentoId >0)
+            if (_atendimentoId.HasValue && _atendimentoId > 0)
             {
                 _atendimentoController.Atualizar(atendimento);
             }
             else
             {
-                _atendimentoController.Salvar(atendimento);
+                int? atendimentoId = _atendimentoController.Salvar(atendimento);
+                txtCodigoAtendimento.Text = atendimentoId.ToString();// mostra o id do atendimento salvo
+                _atendimentoId = atendimentoId;
+
+                btnExluir.Enabled = true;
             }
-               
+
         }
-            
+
         private bool Validardados(Atendimentos atendimento)
         {
             //criar regras de validação de campos 
-            if(string.IsNullOrWhiteSpace(txtCodigoCliente.Text))
+            if (string.IsNullOrWhiteSpace(txtCodigoCliente.Text))
             {
                 cbxNomeCliente.Focus();// coloca o foco no campo
                 ExibirMensagem("Selecione um Cliente");
                 return false;
             }
 
-            if(cbxSituacaoAtendimento.SelectedValue == null)
+            if (cbxSituacaoAtendimento.SelectedValue == null)
             {
                 cbxSituacaoAtendimento.Focus();
                 ExibirMensagem("Selecione uma Situação do Atendimento");
                 return false;
             }
 
-            if(string.IsNullOrWhiteSpace(txtObservacaoAtendimento.Text))
+            if (string.IsNullOrWhiteSpace(txtObservacaoAtendimento.Text))
             {
-                
+
                 ExibirMensagem("Informe uma Observação do Atendimento");
                 txtObservacaoAtendimento.Focus();
                 return false;
@@ -238,7 +242,7 @@ namespace SistemaAtendimento.View
 
             return true;
 
-            
+
         }
 
         public void ExibirMensagem(string mensagem)
@@ -246,6 +250,22 @@ namespace SistemaAtendimento.View
             MessageBox.Show(mensagem);
         }
 
+        private void btnExluir_Click(object sender, EventArgs e)
+        {
+            if(_atendimentoId.HasValue && _atendimentoId > 0)
+            {
+                var Resultado = MessageBox.Show("Tem certeza que deseja excluir este atendimento?", "Confirmação de Exclusão", MessageBoxButtons.YesNo);
+                if (Resultado == DialogResult.Yes)
+                {
+                    _atendimentoController.Excluir(_atendimentoId.Value);
+                    DesabilitarCampos();
+                }
+            }
+            else
+            {
+                ExibirMensagem("Nenhum atendimento selecionado para exclusão.");
+            }
+        }
     }
 }
 

@@ -138,12 +138,12 @@ namespace SistemaAtendimento.Repositories
             return null;
      }   
         
-        public void Inserir(Atendimentos atendimentos)
+        public int Inserir(Atendimentos atendimentos)
         {
             using (var conexao = ConexaoDB.GetConexao())
             {
                 string sql = @"INSERT INTO atendimentos 
-                              (cliente_id, usuario_id, observacao, data_abertura, situacao_atendimento_id)
+                              (cliente_id, usuario_id, observacao, data_abertura, situacao_atendimento_id) OUTPUT INSERTED.id
                               VALUES 
                               (@cliente_id, @usuario_id, @observacao, @data_abertura, @situacao_atendimento_id)";
                 using (var comando = new SqlCommand(sql, conexao))
@@ -155,7 +155,9 @@ namespace SistemaAtendimento.Repositories
                    
                     comando.Parameters.AddWithValue("@situacao_atendimento_id", atendimentos.SituacaoAtendimentoId);
                     conexao.Open();
-                    comando.ExecuteNonQuery();
+
+                    return Convert.ToInt32(comando.ExecuteScalar());//retorna o id inserido
+                    //comando.ExecuteNonQuery();
                 }
             }
         }

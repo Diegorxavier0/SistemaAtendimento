@@ -146,6 +146,7 @@
             btnExluir.Text = "Excluir";
             btnExluir.TextAlign = ContentAlignment.MiddleRight;
             btnExluir.UseVisualStyleBackColor = true;
+            btnExluir.Click += btnExluir_Click;
             // 
             // btnFinalizarAtendimento
             // 
