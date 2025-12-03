@@ -21,8 +21,10 @@ namespace SistemaAtendimento.View
     public partial class FrmAtendimento : Form
     {
         private AtendimentoController _atendimentoController;
+        private EtapasAtendimentoController _etapasAtendimentoController;
 
         private int? _atendimentoId = null; // Armazena o ID do atendimento atual (nulo se for novo)
+
 
         public FrmAtendimento(int? atendimentoId = null)
         {
@@ -58,6 +60,7 @@ namespace SistemaAtendimento.View
             carregarClientes();
             CarregarEtapas();
             CarregarSituacaoAtendimento();
+            _etapasAtendimentoController = new EtapasAtendimentoController(this);
 
             if (_atendimentoId.HasValue)
             {
@@ -69,7 +72,11 @@ namespace SistemaAtendimento.View
                     //preencher os campos com as informações do atendimento
                     PreencherCampos(atendimento);
                     //HabilitarCampos();
+
+                    grbEtapasAtendimento.Enabled = true;// habilita o grupo de etapas do atendimento
+                    CarregarEtapaAtendimento();// carrega as etapas do atendimento
                 }
+
             }
         }
 
@@ -109,7 +116,7 @@ namespace SistemaAtendimento.View
             cbxEtapaAtendimento.DataSource = etapas;
             cbxEtapaAtendimento.DisplayMember = "Nome";
             cbxEtapaAtendimento.SelectedIndex = -1;
-            //cbxEtapaAtendimento.ValueMember = "Id";  NAO É NECESSARIO DESSA LINHA 
+            cbxEtapaAtendimento.ValueMember = "Id";
 
         }
         private void CarregarSituacaoAtendimento()
@@ -144,6 +151,7 @@ namespace SistemaAtendimento.View
             btnSalvar.Enabled = true;
             btnNovo.Enabled = false;
             btnCancelar.Enabled = true;
+            txtEtapaObservacao.Enabled = true;
         }
 
         private void DesabilitarCampos()
@@ -211,6 +219,9 @@ namespace SistemaAtendimento.View
                 _atendimentoId = atendimentoId;
 
                 btnExluir.Enabled = true;
+
+                grbEtapasAtendimento.Enabled = true;// habilita o grupo de etapas do atendimento
+                CarregarEtapaAtendimento();// carrega as etapas do atendimento
             }
 
         }
@@ -252,7 +263,7 @@ namespace SistemaAtendimento.View
 
         private void btnExluir_Click(object sender, EventArgs e)
         {
-            if(_atendimentoId.HasValue && _atendimentoId > 0)
+            if (_atendimentoId.HasValue && _atendimentoId > 0)
             {
                 var Resultado = MessageBox.Show("Tem certeza que deseja excluir este atendimento?", "Confirmação de Exclusão", MessageBoxButtons.YesNo);
                 if (Resultado == DialogResult.Yes)
@@ -265,7 +276,76 @@ namespace SistemaAtendimento.View
             {
                 ExibirMensagem("Nenhum atendimento selecionado para exclusão.");
             }
+
         }
+
+        private void CarregarEtapaAtendimento()
+        {
+            if (!_atendimentoId.HasValue)
+            {
+                return;
+            }
+
+            dgvEtapasAtendimento.DataSource = _etapasAtendimentoController.Listar(_atendimentoId.Value);
+        }
+
+        private void btnAdicionarEtapa_Click(object sender, EventArgs e)
+        {
+            if (!_atendimentoId.HasValue)
+            {
+                MessageBox.Show("Salve o atendimento antes de adicionar etapas.");
+            }
+
+            if (cbxEtapaAtendimento.SelectedValue == null)
+            {
+                MessageBox.Show("Selecione uma etapa para adicionar.");
+                cbxEtapaAtendimento.Focus();// coloca o foco no campo
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtEtapaObservacao.Text))
+            {
+
+                ExibirMensagem("Digite uma Observação do Atendimento");
+                txtEtapaObservacao.Focus();
+                return;
+            }
+
+            var etapaAtendimento = new EtapasAtendimentos
+            {
+                AtendimentoId = _atendimentoId.Value,
+                UsuarioId = 1, // Substitua pelo ID do usuário logado
+                EtapaId = Convert.ToInt32(cbxEtapaAtendimento.SelectedValue),
+                DataCadastro = DateTime.Now,
+                Observacao = txtEtapaObservacao.Text,
+            };
+
+            _etapasAtendimentoController.Salvar(etapaAtendimento);
+
+            cbxEtapaAtendimento.SelectedIndex = -1;
+            txtEtapaObservacao.Clear();
+            CarregarEtapaAtendimento();
+        }
+
+        private void btnExcluirEtapa_Click(object sender, EventArgs e)
+        {
+            if (dgvEtapasAtendimento.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecione uma etapa para excluir.");
+                return;
+            }
+
+            int id = (int)dgvEtapasAtendimento.SelectedRows[0].Cells["Id"].Value;
+
+            var confirmacao = MessageBox.Show("Tem certeza que deseja excluir esta etapa do atendimento?", "Confirmação de Exclusão", MessageBoxButtons.YesNo);
+
+            if (confirmacao == DialogResult.Yes)
+            {
+                _etapasAtendimentoController.Excluir(id);
+                CarregarEtapaAtendimento();
+            }
+        }
+
     }
 }
 

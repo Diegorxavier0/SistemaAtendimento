@@ -308,6 +308,8 @@
             dgvEtapasAtendimento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvEtapasAtendimento.Location = new Point(336, 40);
             dgvEtapasAtendimento.Name = "dgvEtapasAtendimento";
+            dgvEtapasAtendimento.ReadOnly = true;
+            dgvEtapasAtendimento.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvEtapasAtendimento.Size = new Size(432, 216);
             dgvEtapasAtendimento.TabIndex = 13;
             // 
@@ -324,6 +326,7 @@
             btnAdicionarEtapa.Text = "Adicionar Etapa";
             btnAdicionarEtapa.TextAlign = ContentAlignment.MiddleRight;
             btnAdicionarEtapa.UseVisualStyleBackColor = true;
+            btnAdicionarEtapa.Click += btnAdicionarEtapa_Click;
             // 
             // cbxEtapaAtendimento
             // 
@@ -346,13 +349,13 @@
             btnExcluirEtapa.Text = "Excluir Etapa";
             btnExcluirEtapa.TextAlign = ContentAlignment.MiddleRight;
             btnExcluirEtapa.UseVisualStyleBackColor = true;
+            btnExcluirEtapa.Click += btnExcluirEtapa_Click;
             // 
             // txtEtapaObservacao
             // 
             txtEtapaObservacao.Location = new Point(16, 112);
             txtEtapaObservacao.Multiline = true;
             txtEtapaObservacao.Name = "txtEtapaObservacao";
-            txtEtapaObservacao.ReadOnly = true;
             txtEtapaObservacao.Size = new Size(304, 96);
             txtEtapaObservacao.TabIndex = 8;
             // 

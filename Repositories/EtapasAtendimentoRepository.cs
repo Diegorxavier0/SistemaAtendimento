@@ -45,6 +45,8 @@ namespace SistemaAtendimento.Repositories
         }
 
         public void Inserir(EtapasAtendimentos etapaAtendimento)
+
+
         {
             // Lógica para inserir a etapa do atendimento no banco de dados
             using (var conexao = ConexaoDB.GetConexao())

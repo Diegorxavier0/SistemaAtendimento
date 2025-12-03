@@ -59,5 +59,15 @@ namespace SistemaAtendimento.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PRAIA_DE_PIPA {
+            get {
+                object obj = ResourceManager.GetObject("PRAIA DE PIPA", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
