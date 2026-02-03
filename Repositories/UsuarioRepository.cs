@@ -102,5 +102,39 @@ namespace SistemaAtendimento.Repositories
                 }
             }
         }
+
+        public Usuarios login(string email, string senha)
+        {
+            using(var conexao = ConexaoDB.GetConexao())
+            {
+                string sql = @"SELECT * FROM usuarios WHERE email = @email AND senha = @senha";
+                using (var comando = new SqlCommand(sql, conexao))
+                {
+                    // Aqui você precisaria passar os parâmetros de email e senha para o método
+                    // Exemplo:
+                     comando.Parameters.AddWithValue("@email", email);
+                     comando.Parameters.AddWithValue("@senha", senha);
+
+                    conexao.Open();
+                    using (var linha = comando.ExecuteReader())
+                    {
+                        if (linha.Read())
+                        {
+                            return new Usuarios()
+                            {
+                                Id = Convert.ToInt32(linha["id"]),
+                                Nome = linha["nome"].ToString(),
+                                Email = linha["email"].ToString(),
+                                //Senha = linha["senha"].ToString(),
+                                Perfil = linha["perfil"].ToString(),
+                            };
+                        }
+                    }
+                }
+            }
+
+
+            return null;
+        }
     }
 }

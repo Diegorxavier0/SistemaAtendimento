@@ -85,5 +85,18 @@ namespace SistemaAtendimento.Controller
                 _frmCadastroUsuario.ExibirMensagem($"Erro ao excluir o Usuário {ex.Message}");
             }
         }
+
+        public Usuarios Autenticar(string email, string senha)
+        {
+            if(string.IsNullOrEmpty(email) || string.IsNullOrEmpty(senha))
+            {
+                //_frmCadastroUsuario.ExibirMensagem("Email e senha são obrigatórios.");
+                return null;
+
+               
+
+            }
+            return _usuarioRepository.login(email, senha);
+        }
     }
 }
