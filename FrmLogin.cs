@@ -24,7 +24,26 @@ namespace SistemaAtendimento
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-           // Usuarios usuario = _usuarioController.Autenticar();
+            Usuarios usuario = _usuarioController.Autenticar(
+               txtEmail.Text.Trim(),
+               txtSenha.Text.Trim()
+               );
+
+            if (usuario != null)
+            {
+                MessageBox.Show($"Bem-Vindo, {usuario.Nome}");
+                FrmTelaPrincipal principal = new FrmTelaPrincipal();
+                principal.Show();
+
+                this.Hide();
+
+            }
+            else
+            {
+                MessageBox.Show("E-mail ou Senha inválidos", "Erro",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
         }
     }
 }

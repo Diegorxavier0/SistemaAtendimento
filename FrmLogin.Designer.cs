@@ -31,7 +31,7 @@
             lblSenha = new Label();
             txtEmail = new TextBox();
             lblEmail = new Label();
-            textBox2 = new TextBox();
+            txtSenha = new TextBox();
             btnEntrar = new Button();
             label1 = new Label();
             SuspendLayout();
@@ -52,6 +52,7 @@
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(208, 23);
             txtEmail.TabIndex = 1;
+            txtEmail.Text = "edson@email.com";
             // 
             // lblEmail
             // 
@@ -63,12 +64,13 @@
             lblEmail.TabIndex = 2;
             lblEmail.Text = "Email:";
             // 
-            // textBox2
+            // txtSenha
             // 
-            textBox2.Location = new Point(128, 152);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(208, 23);
-            textBox2.TabIndex = 3;
+            txtSenha.Location = new Point(128, 152);
+            txtSenha.Name = "txtSenha";
+            txtSenha.Size = new Size(208, 23);
+            txtSenha.TabIndex = 3;
+            txtSenha.Text = "senha123";
             // 
             // btnEntrar
             // 
@@ -97,7 +99,7 @@
             ClientSize = new Size(447, 270);
             Controls.Add(label1);
             Controls.Add(btnEntrar);
-            Controls.Add(textBox2);
+            Controls.Add(txtSenha);
             Controls.Add(lblEmail);
             Controls.Add(txtEmail);
             Controls.Add(lblSenha);
@@ -113,7 +115,7 @@
         private Label lblSenha;
         private TextBox txtEmail;
         private Label lblEmail;
-        private TextBox textBox2;
+        private TextBox txtSenha;
         private Button btnEntrar;
         private Label label1;
     }

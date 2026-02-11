@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SistemaAtendimento.Model;
 using SistemaAtendimento.Repository;
+using SistemaAtendimento.Services;
 
 namespace SistemaAtendimento.Controller
 {
@@ -86,6 +88,31 @@ namespace SistemaAtendimento.Controller
             {
                 _frmCadastroCliente.ExibirMensagem($"Erro ao excluir o Cliente: {ex.Message}");
             }
+        }
+
+        public void GerarRelatorioPDF()
+        {
+            try 
+            {
+                var listaClientes = _clienteRepository.Listar();
+
+                var relatorioClientes = new RelatorioClientes();
+
+                string arquivo = relatorioClientes.GerarListaClientes(listaClientes);
+
+                var psi = new ProcessStartInfo(arquivo)
+                {
+                    UseShellExecute = true
+                };
+                Process.Start(psi);//abrir o arquivo PDF gerado
+            }
+            catch (Exception ex)
+            {
+               ///Erro ao gerar o relatorio 
+            }
+
+
+            
         }
     }
 }

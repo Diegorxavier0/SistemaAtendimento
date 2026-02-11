@@ -1,4 +1,5 @@
 using Microsoft.Data.SqlClient;
+using SistemaAtendimento.Controller;
 using SistemaAtendimento.Database;
 using SistemaAtendimento.View;
 
@@ -68,6 +69,23 @@ namespace SistemaAtendimento
         {
             FrmConsultaAtendimento frmConsultaAtendimento = new FrmConsultaAtendimento();
             frmConsultaAtendimento.Show();
+        }
+
+        private void listaDeClientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var clienteController = new ClienteController(null);
+                clienteController.GerarRelatorioPDF();
+            }
+            catch (Exception ex) { 
+            
+            MessageBox.Show($"Erro ao processar o relatório: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           /* finally
+            {
+                this.Cursor = Cursors.Default; // Garantir que o cursor volte ao normal
+            } */
         }
     }
 }
