@@ -53,7 +53,7 @@
             mnuTelaPrincipal.Items.AddRange(new ToolStripItem[] { cadastrosToolStripMenuItem, atendimentosToolStripMenuItem, sistemaToolStripMenuItem, relatóriosToolStripMenuItem });
             mnuTelaPrincipal.Location = new Point(0, 0);
             mnuTelaPrincipal.Name = "mnuTelaPrincipal";
-            mnuTelaPrincipal.Size = new Size(800, 24);
+            mnuTelaPrincipal.Size = new Size(794, 24);
             mnuTelaPrincipal.TabIndex = 0;
             mnuTelaPrincipal.Text = "menuStrip1";
             // 
@@ -177,7 +177,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(794, 446);
             Controls.Add(btnConexao);
             Controls.Add(mnuTelaPrincipal);
             MainMenuStrip = mnuTelaPrincipal;
