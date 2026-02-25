@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SistemaAtendimento.Model;
 using SistemaAtendimento.Repositories;
+using SistemaAtendimento.Services;
 using SistemaAtendimento.View;
 
 namespace SistemaAtendimento.Controller
@@ -84,6 +86,30 @@ namespace SistemaAtendimento.Controller
             {
                 _frmCadastroEtapa.ExibirMensagem($"Erro ao excluir a Etapa: {ex.Message}");
             }
+        }
+        public void GerarRelatorioPDF()
+        {
+            try
+            {
+                var listaEtapas = _etapaRepository.Listar();
+
+                var relatorioEtapas = new RelatorioEtapas();
+
+                string arquivo = relatorioEtapas.GerarListaEtapas(listaEtapas);
+
+                var psi = new ProcessStartInfo(arquivo)
+                {
+                    UseShellExecute = true
+                };
+                Process.Start(psi);//abrir o arquivo PDF gerado
+            }
+            catch (Exception ex)
+            {
+                ///Erro ao gerar o relatorio 
+            }
+
+
+
         }
     }
 }

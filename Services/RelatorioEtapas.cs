@@ -13,17 +13,17 @@ namespace SistemaAtendimento.Services
 
 {
 
-    public class RelatorioClientes
+    public class RelatorioEtapas
 
     {
 
-        public string GerarListaClientes(List<Clientes> listaClientes)
+        public string GerarListaEtapas(List<Etapas> listaEtapas)
 
         {
 
             QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
-            string caminho = Path.Combine(Path.GetTempPath(), $"RelatorioCliente_{Guid.NewGuid}.pdf");
+            string caminho = Path.Combine(Path.GetTempPath(), $"RelatorioEtapas_{Guid.NewGuid}.pdf");
 
             Document.Create(container =>
             {
@@ -45,8 +45,8 @@ namespace SistemaAtendimento.Services
                    {
                        row.RelativeItem().Column(col =>
                        {
-                          string logopath = Path.Combine(AppContext.BaseDirectory,"Assets", "logotiposenac.png");
-                           if(File.Exists(logopath))
+                           string logopath = Path.Combine(AppContext.BaseDirectory, "Assets", "logotiposenac.png");
+                           if (File.Exists(logopath))
                            {
                                col.Item().Width(80).Image(logopath);
                            }
@@ -56,7 +56,7 @@ namespace SistemaAtendimento.Services
                            }
                        });
 
-                       row.RelativeItem(1).AlignCenter().AlignMiddle().Text("Lista de Clientes").FontSize(16).Bold();
+                       row.RelativeItem(1).AlignCenter().AlignMiddle().Text("Lista de Etapas").FontSize(16).Bold();
 
                        row.RelativeItem().AlignRight().AlignMiddle().Text(t =>
                        {

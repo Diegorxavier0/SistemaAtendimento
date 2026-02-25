@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SistemaAtendimento.Model;
 using SistemaAtendimento.Repositories;
+using SistemaAtendimento.Repository;
+using SistemaAtendimento.Services;
 using SistemaAtendimento.View;
 
 namespace SistemaAtendimento.Controller
@@ -97,6 +100,31 @@ namespace SistemaAtendimento.Controller
 
             }
             return _usuarioRepository.login(email, senha);
+        }
+
+        public void GerarRelatorioPDF()
+        {
+            try
+            {
+                var listaUsuarios = _usuarioRepository.Listar();
+
+                var relatorioUsuarios = new RelatorioUsuarios();
+
+                string arquivo = relatorioUsuarios.GerarListaUsuarios(listaUsuarios);
+
+                var psi = new ProcessStartInfo(arquivo)
+                {
+                    UseShellExecute = true
+                };
+                Process.Start(psi);//abrir o arquivo PDF gerado
+            }
+            catch (Exception ex)
+            {
+                ///Erro ao gerar o relatorio 
+            }
+
+
+
         }
     }
 }

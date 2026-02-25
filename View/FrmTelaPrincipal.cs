@@ -78,14 +78,62 @@ namespace SistemaAtendimento
                 var clienteController = new ClienteController(null);
                 clienteController.GerarRelatorioPDF();
             }
-            catch (Exception ex) { 
-            
-            MessageBox.Show($"Erro ao processar o relatório: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-           /* finally
+            catch (Exception ex)
             {
-                this.Cursor = Cursors.Default; // Garantir que o cursor volte ao normal
-            } */
+
+                MessageBox.Show($"Erro ao processar o relatório: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            /* finally
+             {
+                 this.Cursor = Cursors.Default; // Garantir que o cursor volte ao normal
+             } */
+        }
+
+        private void FrmTelaPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void listaDeUsuáriosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var usuarioController = new UsuarioController(null);
+                usuarioController.GerarRelatorioPDF();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"Erro ao processar o relatório: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void listaDeEtapasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var etapaController = new EtapaController(null);
+                etapaController.GerarRelatorioPDF();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"Erro ao processar o relatório: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void listaDeSituaçãoDeAtendimentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var situacaoAtendimentoController = new SituacaoAtendimentoController(null);
+                situacaoAtendimentoController.GerarRelatorioPDF();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"Erro ao processar o relatório: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
