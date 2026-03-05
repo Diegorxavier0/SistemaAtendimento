@@ -52,7 +52,7 @@
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(208, 23);
             txtEmail.TabIndex = 1;
-            txtEmail.Text = "edson@email.com";
+            txtEmail.Text = "admin@email.com";
             // 
             // lblEmail
             // 
@@ -70,7 +70,7 @@
             txtSenha.Name = "txtSenha";
             txtSenha.Size = new Size(208, 23);
             txtSenha.TabIndex = 3;
-            txtSenha.Text = "senha123";
+            txtSenha.Text = "123456";
             // 
             // btnEntrar
             // 

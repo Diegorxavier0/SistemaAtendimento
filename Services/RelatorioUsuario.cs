@@ -68,7 +68,35 @@ namespace SistemaAtendimento.Services
                    });
 
                     //corpo do relatório
-                    //page.Content().PaddingVertical(10).Table(table => { });
+                    page.Content().PaddingVertical(10).Table(table => {
+
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(30); // Coluna para ID
+                            columns.RelativeColumn(3);
+                            columns.RelativeColumn(3);
+                           
+
+                        });
+
+                        // Cabeçalho da tabela   define a linha de titulo 
+                        table.Header(header =>
+                        {
+                            header.Cell().BorderBottom(1).Text("ID").Bold();
+                            header.Cell().BorderBottom(1).Text("NOME").Bold();
+                            header.Cell().BorderBottom(1).Text("EMAIL").Bold();
+                            
+                        });
+
+                        foreach (var cliente in listaUsuarios)
+                        {
+                            table.Cell().BorderBottom(0.5f).PaddingVertical(2).Text(cliente.Id.ToString());
+                            table.Cell().BorderBottom(0.5f).PaddingVertical(2).Text(cliente.Nome ?? "-");
+                            table.Cell().BorderBottom(0.5f).PaddingVertical(2).Text(cliente.Email ?? "-");
+                           
+
+                        }
+                    });
 
                     //rodapé do relatório
                     page.Footer().AlignCenter().Text(t =>
